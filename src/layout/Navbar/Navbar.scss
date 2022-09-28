@@ -2,16 +2,87 @@
 
 nav {
     display: flex;
-    background-color: $color-gray;
+    background-color: $color-dark;
+    padding: 0 20px;
+    height: 10vh;
 }
 
+.link__wrapper {
+    // position: relative;
+    display: flex;
+    overflow: auto;
+    align-items: center;
+    white-space: nowrap;
+    scroll-behavior: smooth !important;
+}
+
+.nav__tag {
+    position: relative;
+    width: 60%;
+    display: flex;
+}
+
+.nav__btn {
+    margin: 0 10px;
+    position: absolute;
+    top: 0;
+    
+    &--left {
+        display: flex;
+        align-items: center;
+
+        &__icon {
+            cursor: pointer;
+            padding: 10px;
+            font-size: 20px;
+            color: $color-grayLighter !important;
+            transition: all 0.3s ease-in-out;
+
+            &:hover {
+                color: $color-primary !important;
+                transition: all 0.3s ease-in-out;
+            }
+        }
+    }
+
+    &--right {
+        display: flex;
+        align-items: center;
+
+        &__icon {
+            cursor: pointer;
+            padding: 10px;
+            font-size: 20px;
+            color: $color-grayLighter !important;
+            transition: all 0.3s ease-in-out;
+        }
+
+        &:hover {
+            color: $color-primary !important;
+            transition: all 0.3s ease-in-out;
+        }
+    }
+}
+
+
 .navbar--link {
-    padding: 10px 20px;
+    align-self: stretch;
+    padding: 10px 15px;
     text-transform: uppercase;
     font-weight: 500;
+    color: $color-grayLighter;
+    position: relative;
+    display: flex;
+    align-items: center;
 
     &__active {
-        background-color: $color-primary;
-        color: $color-dark;
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            border-bottom: 2px solid $color-primary;
+        }
     }
 }

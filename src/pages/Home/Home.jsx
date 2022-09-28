@@ -1,13 +1,13 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 
 import Header from '../../layout/Header/Header';
-import Artworks from '../../layout/Artworks/Artworks';
 
 const Home = () => {
   return (
     <>
       <Header />
-      <Artworks />
+      <Outlet />
     </>
   );
 };

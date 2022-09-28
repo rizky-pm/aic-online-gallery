@@ -5,3 +5,22 @@
     font-size: 24px;
     padding: 0 10px;
 }
+
+.ant-input-affix-wrapper {
+    // background-color: $color-grayLighter !important;
+}
+
+.rounded {
+    width: 50% !important;
+    align-self: center;
+    background-color: $color-grayLighter !important;
+    border-radius: 50px !important;
+    padding: 5px !important;
+    overflow: hidden !important;
+    margin: 0 25px;
+
+    .ant-input {
+        background-color: inherit !important;
+        // color: red !important;
+    }
+}

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { Button } from 'antd';
 
 import ArtworkCard from '../../components/ArtworkCard/ArtworkCard';
 
 import { getAllArtworks } from '../../api';
-import { splitArray } from '../../helper';
+import { capitalizeFirstLetter, removeSlash, splitArray } from '../../helper';
 import { fetched } from '../../store/artworks.slice';
 
 import './Artworks.scss';
@@ -18,11 +19,15 @@ const Artworks = () => {
   const artworksState = useSelector((state) => state.artworks.data);
   const pageState = useSelector((state) => state.artworks.page);
   const dispatch = useDispatch();
+  const tag = removeSlash(useLocation().pathname);
+  console.log(artworksState);
 
   const fetchAllArtworks = async () => {
-    const query = `/search?fields=artist_id,artist_title,date_start,id,image_id,alt_image_ids,title,artwork_type_title,thumbnail,artwork_type_id&query[match][artwork_type_title]=Painting${
-      pageState ? `&page=${pageState + 1}` : ''
-    }&limit=9`;
+    const query = `/search?fields=artist_id,artist_title,date_start,id,image_id,alt_image_ids,title,artwork_type_title,thumbnail,artwork_type_id${
+      tag ? `&query[match][artwork_type_title]=${tag}` : ''
+    }${pageState ? `&page=${pageState + 1}` : ''}&limit=9`;
+
+    console.log(query);
 
     setIsFetching(true);
 
@@ -39,7 +44,7 @@ const Artworks = () => {
     if (artworksState.length < 9) {
       fetchAllArtworks();
     }
-  }, []);
+  }, [tag]);
 
   useEffect(() => {
     if (artworksState.length > 0) {

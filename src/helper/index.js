@@ -10,3 +10,11 @@ export const splitArray = (array, size) => {
 export const randomNumberWithMinMax = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
+
+export const removeSlash = (string) => {
+  return string.replace(/\//g, '');
+};
+
+export const capitalizeFirstLetter = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};

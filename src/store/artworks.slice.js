@@ -13,8 +13,12 @@ const artworksSlice = createSlice({
       state.data = [...state.data, ...action.payload];
       state.page += 1;
     },
+    clearArtworks: (state) => {
+      state.data = [];
+      state.page = 0;
+    },
   },
 });
 
 export default artworksSlice.reducer;
-export const { fetched } = artworksSlice.actions;
+export const { fetched, clearArtworks } = artworksSlice.actions;
