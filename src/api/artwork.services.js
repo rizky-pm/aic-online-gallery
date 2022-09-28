@@ -13,6 +13,19 @@ export const getAllArtworks = async (queryPayload) => {
   }
 };
 
+export const getSearchedArtworks = async (queryPayload) => {
+  try {
+    const response = await axios({
+      method: 'GET',
+      url: 'artworks/search' + queryPayload,
+    });
+
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const getArtworkById = async (artworkId, query) => {
   try {
     const response = await axios({

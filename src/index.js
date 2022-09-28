@@ -4,8 +4,10 @@ import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
 
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
 import App from './App';
+import store from './store';
 // import './index.scss';
 import './styles.less';
 
@@ -14,7 +16,9 @@ axios.defaults.baseURL = 'https://api.artic.edu/api/v1';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </BrowserRouter>
 );
 

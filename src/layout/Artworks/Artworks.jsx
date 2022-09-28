@@ -1,23 +1,27 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Button } from 'antd';
 
 import ArtworkCard from '../../components/ArtworkCard/ArtworkCard';
 
 import { getAllArtworks } from '../../api';
 import { splitArray } from '../../helper';
+import { fetched } from '../../store/artworks.slice';
 
 import './Artworks.scss';
 import SpinComponent from '../../components/SpinComponent/SpinComponent';
 
 const Artworks = () => {
   const [isFetching, setIsFetching] = useState(false);
-  const [artworks, setArtworks] = useState([]);
   const [splittedArray, setSplittedArray] = useState([]);
-  const [page, setPage] = useState(0);
+
+  const artworksState = useSelector((state) => state.artworks.data);
+  const pageState = useSelector((state) => state.artworks.page);
+  const dispatch = useDispatch();
 
   const fetchAllArtworks = async () => {
     const query = `/search?fields=artist_id,artist_title,date_start,id,image_id,alt_image_ids,title,artwork_type_title,thumbnail,artwork_type_id&query[match][artwork_type_title]=Painting${
-      page ? `&page=${page + 1}` : ''
+      pageState ? `&page=${pageState + 1}` : ''
     }&limit=9`;
 
     setIsFetching(true);
@@ -27,20 +31,23 @@ const Artworks = () => {
     setIsFetching(false);
 
     if (response.status === 200) {
-      setPage(page + 1);
-      setArtworks((prevState) => [...prevState, ...response.data.data]);
+      dispatch(fetched(response.data.data));
     }
   };
 
   useEffect(() => {
-    fetchAllArtworks();
+    if (artworksState.length < 9) {
+      fetchAllArtworks();
+    }
   }, []);
 
   useEffect(() => {
-    if (artworks.length > 0) {
-      setSplittedArray(splitArray(artworks, page === 1 ? 3 : 3 * page));
+    if (artworksState.length > 0) {
+      setSplittedArray(
+        splitArray(artworksState, pageState === 1 ? 3 : 3 * pageState)
+      );
     }
-  }, [artworks]);
+  }, [artworksState]);
 
   return (
     <section className='artworks-container'>
