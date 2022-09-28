@@ -1,0 +1,51 @@
+@import "../../styles/main.scss";
+
+.detail {
+    
+    &__container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 40px ;
+        // height: 60vh;
+        // aspect-ratio: 16 / 9;
+    }
+
+    &__header {
+        display: flex;
+        flex-direction: column;
+
+        &__title {
+            font-weight: 700;
+        }
+
+        &__artist {
+            font-style: italic;
+            font-size: 16px;
+        }
+    }
+
+    &__description {
+        font-size: 16px;
+    }
+
+    &__wrapper__image {
+        align-self: center;
+        padding: 50px;
+        width: 100%;
+        background-color: whitesmoke;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    }
+
+    &__image {
+        object-fit: contain;
+        background-repeat: no-repeat;
+
+        &:hover {
+            cursor: zoom-in;
+        }
+    }
+}

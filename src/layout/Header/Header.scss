@@ -1,0 +1,54 @@
+@import "../../styles/main.scss";
+
+header {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.25);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 93.5vh;
+    width: 100%;
+}
+
+.header--overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.header--content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    // align-items: center;
+    height: 100%;
+    padding: 0 250px;
+    color: $color-light;
+    // text-align: center;
+
+    &__title {
+        font-size: 36px;
+        font-weight: 700;
+        color: $color-light;
+    }
+
+    &__desc {
+        font-size: 20px;
+        color: $color-light;
+    }
+
+    &__credit {
+        position: absolute;
+        bottom: 2%;
+        left: 1%;
+
+        &--text {
+            color: $color-light;
+            font-weight: 700;
+        }
+    }
+}

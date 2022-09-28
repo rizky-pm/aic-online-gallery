@@ -1,0 +1,17 @@
+@import "../../styles/main.scss";
+
+nav {
+    display: flex;
+    background-color: $color-gray;
+}
+
+.navbar--link {
+    padding: 10px 20px;
+    text-transform: uppercase;
+    font-weight: 500;
+
+    &__active {
+        background-color: $color-primary;
+        color: $color-dark;
+    }
+}

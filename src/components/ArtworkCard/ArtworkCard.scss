@@ -1,0 +1,54 @@
+@import "../../styles/main.scss";
+
+.artwork {
+    position: relative;
+
+    &:hover {
+        cursor: pointer;
+    }
+    
+    
+    &--overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 10px;
+        opacity: 0;
+        height: 100%;
+        width: 100%;
+        transition: all 0.3s ease;
+
+        &__hovered {
+            opacity: 1;
+            transition: all 0.3s ease;
+        }
+
+        &--meta {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding: 10px;
+
+            
+            &__artist {
+                color: $color-light;
+                font-weight: 700;
+                font-size: 18px;
+            }
+
+            &__title {
+                color: $color-light;
+            }
+        }
+
+    }
+
+
+    &__image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background-repeat: no-repeat;
+    }
+}

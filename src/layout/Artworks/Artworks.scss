@@ -1,0 +1,26 @@
+.artworks-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    &__button {
+        width: 15%;
+    }
+
+    &__gallery--outer {
+        grid-column-gap: 24px;
+        grid-row-gap: 24px;
+        align-items: start;
+        display: grid;
+        grid-template-columns: repeat(3,minmax(0,1fr));
+    }
+
+    &__gallery--inner {
+        display: grid;
+        grid-template-columns: minmax(0,1fr);
+        row-gap: 24px;
+    }
+}

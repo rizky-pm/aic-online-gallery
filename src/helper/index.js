@@ -1,0 +1,12 @@
+export const splitArray = (array, size) => {
+  const result = [];
+  for (let i = 0; i < array.length; i += size) {
+    result.push(array.slice(i, i + size));
+  }
+
+  return result;
+};
+
+export const randomNumberWithMinMax = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
