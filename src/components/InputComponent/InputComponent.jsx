@@ -4,11 +4,18 @@ import { Input } from 'antd';
 
 import './InputComponent.scss';
 
-const InputComponent = ({ rounded }) => {
+const InputComponent = ({ type }) => {
   return (
     <Input
-      prefix={<SearchOutlined className='input-search-component' />}
-      className={`${rounded ? 'rounded' : ''}`}
+      prefix={
+        <SearchOutlined
+          onClick={() => {
+            console.log('Searching ...');
+          }}
+          className='input-search-component'
+        />
+      }
+      className={type}
       placeholder='Search by artist, title, or keyword'
     />
   );

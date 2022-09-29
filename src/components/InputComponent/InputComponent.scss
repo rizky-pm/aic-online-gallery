@@ -1,13 +1,25 @@
 @import "../../styles/main.scss";
 
 .input-search-component.anticon {
-    color: $color-dark;
+    color: $color-grayLight;
     font-size: 24px;
     padding: 0 10px;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+        cursor: pointer;
+        color: $color-dark;
+        transition: all 0.3s ease-in-out;
+    }
 }
 
-.ant-input-affix-wrapper {
-    // background-color: $color-grayLighter !important;
+.default {
+    border-radius: 3px !important;
+    padding: 5px !important;
+
+    .ant-input {
+        background-color: inherit !important;
+    }
 }
 
 .rounded {
@@ -21,6 +33,5 @@
 
     .ant-input {
         background-color: inherit !important;
-        // color: red !important;
     }
 }

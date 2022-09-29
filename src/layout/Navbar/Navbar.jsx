@@ -30,7 +30,7 @@ const Navbar = () => {
 
   return (
     <nav>
-      <InputComponent rounded />
+      <InputComponent type='rounded' />
       <div className='nav__tag'>
         <span className='nav__btn--left' onClick={scrollToLeft}>
           <CaretLeftOutlined className='nav__btn--left__icon' />

@@ -45,11 +45,11 @@ const Header = () => {
     >
       <div className='header--overlay'></div>
       <div className='header--content'>
-        <h1 className='header--content__title'>Artstyle</h1>
+        <h1 className='header--content__title'>Artlerry</h1>
         <p className='header--content__desc'>
           Museum visit from anywhere and anywhen.
         </p>
-        <InputComponent />
+        <InputComponent type='default' />
 
         {headerData && (
           <div className='header--content__credit'>
