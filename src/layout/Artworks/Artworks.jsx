@@ -6,7 +6,7 @@ import { Button } from 'antd';
 import ArtworkCard from '../../components/ArtworkCard/ArtworkCard';
 
 import { getAllArtworks } from '../../api';
-import { capitalizeFirstLetter, removeSlash, splitArray } from '../../helper';
+import { removeSlash, splitArray } from '../../helper';
 import { fetched } from '../../store/artworks.slice';
 
 import './Artworks.scss';
@@ -55,31 +55,32 @@ const Artworks = () => {
   }, [artworksState]);
 
   return (
-    <section className='artworks-container'>
-      <h1>Explore Artworks</h1>
+    <section className='artworks__container'>
       {splittedArray && (
-        <div className='artworks-container__gallery--outer'>
-          <div className='artworks-container__gallery--inner'>
+        <div className='artworks__gallery--outer'>
+          <div className='artworks__gallery--inner'>
             {splittedArray[0]?.map((artwork) => {
               return <ArtworkCard key={artwork.id} data={artwork} />;
             })}
           </div>
-          <div className='artworks-container__gallery--inner'>
+          <div className='artworks__gallery--inner'>
             {splittedArray[1]?.map((artwork) => {
               return <ArtworkCard key={artwork.id} data={artwork} />;
             })}
           </div>
-          <div className='artworks-container__gallery--inner'>
+          <div className='artworks__gallery--inner'>
             {splittedArray[2]?.map((artwork) => {
               return <ArtworkCard key={artwork.id} data={artwork} />;
             })}
           </div>
         </div>
       )}
-      <div className='artworks-container__button'>
-        <Button block type='primary' onClick={fetchAllArtworks}>
-          {isFetching ? <SpinComponent /> : 'Load More'}
-        </Button>
+      <div className='artworks__button'>
+        {artworksState && (
+          <Button block type='primary' onClick={fetchAllArtworks}>
+            {isFetching ? <SpinComponent /> : 'Load More'}
+          </Button>
+        )}
       </div>
     </section>
   );

@@ -1,6 +1,10 @@
 @import "../../styles/main.scss";
 
 nav {
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    z-index: 10;
     display: flex;
     background-color: $color-dark;
     padding: 0 20px;
