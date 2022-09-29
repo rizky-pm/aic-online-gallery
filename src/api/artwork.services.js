@@ -13,6 +13,19 @@ export const getAllArtworks = async (queryPayload) => {
   }
 };
 
+export const getArtworkByKeyword = async (keyword, queryPayload) => {
+  try {
+    const response = await axios({
+      method: 'GET',
+      url: '/artworks/search?q=' + keyword + queryPayload,
+    });
+
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const getSearchedArtworks = async (queryPayload) => {
   try {
     const response = await axios({

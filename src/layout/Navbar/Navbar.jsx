@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { Button } from 'antd';
 import { CaretLeftOutlined, CaretRightOutlined } from '@ant-design/icons';
 
 import { selectTag } from '../../store/tag.slice';
@@ -50,7 +49,7 @@ const Navbar = () => {
             className={({ isActive }) =>
               (isActive ? 'navbar--link__active' : undefined) + ' navbar--link'
             }
-            to='/paintings'
+            to='/t/paintings'
             onClick={() => selectTagHandler('Paintings')}
           >
             Paintings
@@ -59,7 +58,7 @@ const Navbar = () => {
             className={({ isActive }) =>
               (isActive ? 'navbar--link__active' : undefined) + ' navbar--link'
             }
-            to='/sculptures'
+            to='/t/sculptures'
             onClick={() => selectTagHandler('Sculptures')}
           >
             Sculptures
@@ -68,7 +67,7 @@ const Navbar = () => {
             className={({ isActive }) =>
               (isActive ? 'navbar--link__active' : undefined) + ' navbar--link'
             }
-            to='/graphic-designs'
+            to='/t/graphic-designs'
             onClick={() => selectTagHandler('Graphic Designs')}
           >
             Graphic Designs
@@ -77,7 +76,7 @@ const Navbar = () => {
             className={({ isActive }) =>
               (isActive ? 'navbar--link__active' : undefined) + ' navbar--link'
             }
-            to='/photograph'
+            to='/t/photograph'
             onClick={() => selectTagHandler('Photograph')}
           >
             Photograph
@@ -86,7 +85,7 @@ const Navbar = () => {
             className={({ isActive }) =>
               (isActive ? 'navbar--link__active' : undefined) + ' navbar--link'
             }
-            to='/mixed-media'
+            to='/t/mixed-media'
             onClick={() => selectTagHandler('Mixed Media')}
           >
             Mixed Media
@@ -95,7 +94,7 @@ const Navbar = () => {
             className={({ isActive }) =>
               (isActive ? 'navbar--link__active' : undefined) + ' navbar--link'
             }
-            to='/textile'
+            to='/t/textile'
             onClick={() => selectTagHandler('Textile')}
           >
             Textile
@@ -104,7 +103,7 @@ const Navbar = () => {
             className={({ isActive }) =>
               (isActive ? 'navbar--link__active' : undefined) + ' navbar--link'
             }
-            to='/furniture'
+            to='/t/furniture'
             onClick={() => selectTagHandler('Furniture')}
           >
             Furniture
@@ -113,7 +112,7 @@ const Navbar = () => {
             className={({ isActive }) =>
               (isActive ? 'navbar--link__active' : undefined) + ' navbar--link'
             }
-            to='/mask'
+            to='/t/mask'
             onClick={() => selectTagHandler('Mask')}
           >
             Mask
@@ -122,7 +121,7 @@ const Navbar = () => {
             className={({ isActive }) =>
               (isActive ? 'navbar--link__active' : undefined) + ' navbar--link'
             }
-            to='/decorative-arts'
+            to='/t/decorative-arts'
             onClick={() => selectTagHandler('Decorative Arts')}
           >
             Decorative Arts
@@ -131,7 +130,7 @@ const Navbar = () => {
             className={({ isActive }) =>
               (isActive ? 'navbar--link__active' : undefined) + ' navbar--link'
             }
-            to='/book'
+            to='/t/book'
             onClick={() => selectTagHandler('Book')}
           >
             Book

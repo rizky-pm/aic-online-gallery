@@ -8,21 +8,25 @@ import './Header.scss';
 
 import { getAllArtworks } from '../../api';
 import {
-  getQueryArtworkTypeImageId,
+  querySelector,
   randomNumberWithMinMax,
-  removeSlash,
+  removeString,
 } from '../../helper';
 
 const PageLimit = 10;
 
 const Header = () => {
   const [headerData, setHeaderData] = useState({});
-  const tag = removeSlash(useLocation().pathname);
+
+  const location = useLocation().pathname;
+  let tag = removeString(useLocation().pathname, '/t/');
+  const searchQuery = removeString(useLocation().pathname, '/s/');
 
   const fetchAllArtworks = async () => {
-    const query = `/search?fields=artist_id,artist_title,date_start,id,image_id,alt_image_ids,title,artwork_type_title,thumbnail,artwork_type_id${
-      tag ? getQueryArtworkTypeImageId(tag) : ''
-    }&limit=${PageLimit}&page=${randomNumberWithMinMax(1, 100)}`;
+    const query = tag.includes('/s/')
+      ? querySelector(location, (tag = ''), searchQuery)
+      : querySelector(location, tag, searchQuery);
+    console.log(query);
 
     const response = await getAllArtworks(query);
 
@@ -30,8 +34,6 @@ const Header = () => {
       setHeaderData(response.data.data[randomNumberWithMinMax(0, PageLimit)]);
     }
   };
-
-  console.log({ headerData });
 
   useEffect(() => {
     fetchAllArtworks();
