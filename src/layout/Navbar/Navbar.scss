@@ -10,7 +10,7 @@ nav {
 .link__wrapper {
     // position: relative;
     display: flex;
-    overflow: auto;
+    overflow: hidden;
     align-items: center;
     white-space: nowrap;
     scroll-behavior: smooth !important;
