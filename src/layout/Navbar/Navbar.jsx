@@ -16,11 +16,11 @@ const Navbar = () => {
   console.log(navLinksRef);
 
   const scrollToLeft = () => {
-    navLinksRef.current.scrollLeft -= 100;
+    navLinksRef.current.scrollLeft -= 300;
   };
 
   const scrollRight = () => {
-    navLinksRef.current.scrollLeft += 100;
+    navLinksRef.current.scrollLeft += 300;
   };
 
   const selectTagHandler = (tag) => {

@@ -6,8 +6,13 @@ import { Button } from 'antd';
 import ArtworkCard from '../../components/ArtworkCard/ArtworkCard';
 
 import { getAllArtworks } from '../../api';
-import { removeSlash, splitArray } from '../../helper';
-import { fetched } from '../../store/artworks.slice';
+import {
+  getQueryArtworkTypeImageId,
+  randomNumberWithMinMax,
+  removeSlash,
+  splitArray,
+} from '../../helper';
+import { fetched, fetchTotalPage } from '../../store/artworks.slice';
 
 import './Artworks.scss';
 import SpinComponent from '../../components/SpinComponent/SpinComponent';
@@ -18,27 +23,29 @@ const Artworks = () => {
 
   const artworksState = useSelector((state) => state.artworks.data);
   const pageState = useSelector((state) => state.artworks.page);
+  const totalPageState = useSelector((state) => state.artworks.totalPage);
   const dispatch = useDispatch();
   const tag = removeSlash(useLocation().pathname);
-  console.log(artworksState);
+  console.log(totalPageState);
 
   const fetchAllArtworks = async () => {
     const query = `/search?fields=artist_id,artist_title,date_start,id,image_id,alt_image_ids,title,artwork_type_title,thumbnail,artwork_type_id${
-      tag ? `&query[match][artwork_type_title]=${tag}` : ''
-    }${pageState ? `&page=${pageState + 1}` : ''}&limit=9`;
-
-    console.log(query);
+      tag ? getQueryArtworkTypeImageId(tag) : ''
+    }&page=${randomNumberWithMinMax(1, 100)}&limit=9`;
 
     setIsFetching(true);
+    console.log(query);
 
     const response = await getAllArtworks(query);
-
     setIsFetching(false);
 
     if (response.status === 200) {
       dispatch(fetched(response.data.data));
+      dispatch(fetchTotalPage(response.data.pagination.total_pages));
     }
   };
+
+  console.log(artworksState);
 
   useEffect(() => {
     if (artworksState.length < 9) {

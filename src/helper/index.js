@@ -18,3 +18,7 @@ export const removeSlash = (string) => {
 export const capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
+
+export const getQueryArtworkTypeImageId = (artworkType) => {
+  return `&query[match][artwork_type_title]=${artworkType}&[exists][field]=image_id`;
+};

@@ -1,33 +1,41 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import InputComponent from '../../components/InputComponent/InputComponent';
 
 import './Header.scss';
 
-import { getAllArtworks, getArtworkById } from '../../api';
-import { randomNumberWithMinMax } from '../../helper';
+import { getAllArtworks } from '../../api';
+import {
+  getQueryArtworkTypeImageId,
+  randomNumberWithMinMax,
+  removeSlash,
+} from '../../helper';
 
-const PageLimit = 9;
+const PageLimit = 10;
 
 const Header = () => {
   const [headerData, setHeaderData] = useState({});
+  const tag = removeSlash(useLocation().pathname);
 
   const fetchAllArtworks = async () => {
-    const query = `/search?fields=artist_id,artist_title,date_start,id,image_id,alt_image_ids,title,artwork_type_title,thumbnail,artwork_type_id&query[match][artwork_type_title]=Painting&limit=${PageLimit}`;
+    const query = `/search?fields=artist_id,artist_title,date_start,id,image_id,alt_image_ids,title,artwork_type_title,thumbnail,artwork_type_id${
+      tag ? getQueryArtworkTypeImageId(tag) : ''
+    }&limit=${PageLimit}&page=${randomNumberWithMinMax(1, 100)}`;
 
     const response = await getAllArtworks(query);
 
-    console.log(response);
     if (response.status === 200) {
       setHeaderData(response.data.data[randomNumberWithMinMax(0, PageLimit)]);
     }
   };
 
-  console.log(headerData);
+  console.log({ headerData });
 
   useEffect(() => {
     fetchAllArtworks();
-  }, []);
+  }, [tag]);
 
   return (
     <header
@@ -43,12 +51,19 @@ const Header = () => {
         </p>
         <InputComponent />
 
-        <div className='header--content__credit'>
-          <p className='header--content__credit--text'>
-            By {headerData?.artist_title}
-          </p>
-          <p className='header--content__credit--text'>{headerData?.title}</p>
-        </div>
+        {headerData && (
+          <div className='header--content__credit'>
+            <p className='header--content__credit--artist'>
+              By {headerData?.artist_title}
+            </p>
+            <Link
+              to={`/artwork/${headerData.id}`}
+              className='header--content__credit--title'
+            >
+              {headerData?.title}
+            </Link>
+          </div>
+        )}
       </div>
     </header>
   );
