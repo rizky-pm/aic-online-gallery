@@ -32,7 +32,7 @@ const Artworks = () => {
 
   const artworksState = useSelector((state) => state.artworks.data);
   const pageState = useSelector((state) => state.artworks.page);
-  const totalPageState = useSelector((state) => state.artworks.totalPage);
+
   const dispatch = useDispatch();
   const location = useLocation().pathname;
   let tag = removeString(useLocation().pathname, '/t/');
@@ -69,11 +69,9 @@ const Artworks = () => {
     );
   }, [artworksState, location]);
 
-  console.log(artworksState);
-
   return (
     <section className='artworks__container'>
-      {searchQuery !== '/' && (
+      {includeString(tag, '/s/') && (
         <h1 className='artworks__title'>
           Showing results related to "{searchQuery}"
         </h1>
