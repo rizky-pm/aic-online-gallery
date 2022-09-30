@@ -27,6 +27,7 @@ import { FIELDS_PARAM } from '../../constants';
 
 const Artworks = () => {
   const [isFetching, setIsFetching] = useState(false);
+  const [page, setPage] = useState(1);
   const [splittedArray, setSplittedArray] = useState([]);
 
   const artworksState = useSelector((state) => state.artworks.data);
@@ -38,12 +39,10 @@ const Artworks = () => {
   const searchQuery = removeString(useLocation().pathname, '/s/');
 
   const fetchAllArtworks = async () => {
-    // const query = `/search?fields=artist_id,artist_title,date_start,id,image_id,alt_image_ids,title,artwork_type_title,thumbnail,artwork_type_id${
-    //   tag ? getQueryArtworkTypeImageId(tag) : ''
-    // }&page=${randomNumberWithMinMax(1, 100)}&limit=9`;
+    setPage((prevState) => prevState + 1);
 
     const query = tag.includes('/s/')
-      ? querySelector(location, (tag = ''), searchQuery)
+      ? querySelector(location, (tag = ''), searchQuery, page)
       : querySelector(location, tag, searchQuery);
 
     console.log(query);
@@ -51,7 +50,6 @@ const Artworks = () => {
     setIsFetching(true);
 
     const response = await getAllArtworks(query);
-    console.log({ response });
     setIsFetching(false);
 
     if (response.status === 200) {
@@ -61,25 +59,25 @@ const Artworks = () => {
   };
 
   useEffect(() => {
-    if (artworksState.length < 9) {
-      fetchAllArtworks();
-    }
-  }, [tag]);
-
-  useEffect(() => {
     dispatch(clearArtworks());
+    fetchAllArtworks();
   }, [location]);
 
   useEffect(() => {
-    if (artworksState.length > 0) {
-      setSplittedArray(
-        splitArray(artworksState, pageState === 1 ? 3 : 3 * pageState)
-      );
-    }
-  }, [artworksState]);
+    setSplittedArray(
+      splitArray(artworksState, pageState === 1 ? 3 : 3 * pageState)
+    );
+  }, [artworksState, location]);
+
+  console.log(artworksState);
 
   return (
     <section className='artworks__container'>
+      {searchQuery !== '/' && (
+        <h1 className='artworks__title'>
+          Showing results related to "{searchQuery}"
+        </h1>
+      )}
       {splittedArray && (
         <div className='artworks__gallery--outer'>
           <div className='artworks__gallery--inner'>
@@ -100,7 +98,7 @@ const Artworks = () => {
         </div>
       )}
       <div className='artworks__button'>
-        {artworksState && (
+        {artworksState.length > 0 && (
           <Button block type='primary' onClick={fetchAllArtworks}>
             {isFetching ? <SpinComponent /> : 'Load More'}
           </Button>

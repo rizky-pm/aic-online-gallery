@@ -12,8 +12,6 @@ const Navbar = () => {
   const navLinksRef = useRef(null);
   const dispatch = useDispatch();
 
-  console.log(navLinksRef);
-
   const scrollToLeft = () => {
     navLinksRef.current.scrollLeft -= 300;
   };

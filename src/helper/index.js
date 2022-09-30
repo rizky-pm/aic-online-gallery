@@ -41,9 +41,8 @@ export const getQueryMatch = (field_name, field_value) => {
   return `[match][${field_name}]=${field_value}`;
 };
 
-export const querySelector = (location, tag, searchQuery) => {
+export const querySelector = (location, tag, searchQuery, page) => {
   let locationTag = location.substring(0, 3);
-  console.log({ searchQuery });
 
   switch (locationTag) {
     case '/t/':
@@ -56,12 +55,9 @@ export const querySelector = (location, tag, searchQuery) => {
       )}&limit=9`;
 
     case '/s/':
-      console.log('Search');
       return `/search?${FIELDS_PARAM}&query${getQueryExists(
         'image_id'
-      )}&page=${randomNumberWithMinMax(1, 100)}&q=${removeString(
-        searchQuery
-      )}&limit=9`;
+      )}&page=${page}&q=${removeString(searchQuery)}&limit=9`;
 
     default:
       return `/search?${FIELDS_PARAM}&page=${randomNumberWithMinMax(
