@@ -72,7 +72,7 @@ const Header = () => {
       <div className='header--content'>
         <h1 className='header--content__title'>Artlerry</h1>
         <p className='header--content__desc'>
-          Museum visit from anywhere and anywhen.
+          Home to a collection of art that spans centuries and the globe
         </p>
         <InputComponent type='default' onClick={scrollToPositionHandler} />
 
