@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   data: [],
   page: 0,
-  totalData: 0,
+  totalData: 1,
   totalPage: 0,
 };
 
@@ -13,7 +13,7 @@ const artworksSlice = createSlice({
   reducers: {
     fetched: (state, action) => {
       state.data = [...state.data, ...action.payload];
-      state.page += 1;
+      // state.page = 1;
     },
     clearArtworks: (state) => {
       state.data = [];
@@ -25,9 +25,21 @@ const artworksSlice = createSlice({
     fetchTotalPage: (state, action) => {
       state.totalPage = action.payload;
     },
+    addPage: (state) => {
+      state.page = state.page + 1;
+    },
+    resetPage: (state) => {
+      state.page = 0;
+    },
   },
 });
 
 export default artworksSlice.reducer;
-export const { fetched, clearArtworks, fetchTotalData, fetchTotalPage } =
-  artworksSlice.actions;
+export const {
+  fetched,
+  clearArtworks,
+  fetchTotalData,
+  fetchTotalPage,
+  addPage,
+  resetPage,
+} = artworksSlice.actions;

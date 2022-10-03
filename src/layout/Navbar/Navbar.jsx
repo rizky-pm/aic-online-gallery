@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { CaretLeftOutlined, CaretRightOutlined } from '@ant-design/icons';
 
 import { selectTag } from '../../store/tag.slice';
-import { clearArtworks } from '../../store/artworks.slice';
+import { clearArtworks, resetPage } from '../../store/artworks.slice';
 import './Navbar.scss';
 import InputComponent from '../../components/InputComponent/InputComponent';
 
@@ -21,6 +21,7 @@ const Navbar = () => {
   };
 
   const selectTagHandler = (tag) => {
+    dispatch(resetPage());
     dispatch(clearArtworks());
     dispatch(selectTag(tag));
   };

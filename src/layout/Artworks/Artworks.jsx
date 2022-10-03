@@ -1,33 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { Button } from 'antd';
 
 import ArtworkCard from '../../components/ArtworkCard/ArtworkCard';
 
-import { getAllArtworks } from '../../api';
+import { getAllArtworks, getTotalPages } from '../../api';
 import {
-  getQueryArtworkTypeImageId,
   includeString,
   querySelector,
-  randomNumberWithMinMax,
-  removeSlash,
   removeString,
   splitArray,
 } from '../../helper';
 import {
+  addPage,
   clearArtworks,
   fetched,
   fetchTotalPage,
+  resetPage,
 } from '../../store/artworks.slice';
 
 import './Artworks.scss';
 import SpinComponent from '../../components/SpinComponent/SpinComponent';
-import { FIELDS_PARAM } from '../../constants';
 
 const Artworks = () => {
   const [isFetching, setIsFetching] = useState(false);
-  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [splittedArray, setSplittedArray] = useState([]);
 
   const artworksState = useSelector((state) => state.artworks.data);
@@ -38,15 +36,24 @@ const Artworks = () => {
   let tag = removeString(useLocation().pathname, '/t/');
   const searchQuery = removeString(useLocation().pathname, '/s/');
 
-  const fetchAllArtworks = async () => {
-    setPage((prevState) => prevState + 1);
-
+  const fetchAllArtworks = async (artworksPage) => {
+    dispatch(addPage());
+    console.log({ artworksPage });
     const query = tag.includes('/s/')
-      ? querySelector(location, (tag = ''), searchQuery, page)
-      : querySelector(location, tag, searchQuery);
+      ? querySelector(
+          location,
+          (tag = ''),
+          searchQuery,
+          artworksPage === 0 ? 1 : artworksPage + 1
+        )
+      : querySelector(
+          location,
+          tag,
+          searchQuery,
+          artworksPage === 0 ? 1 : artworksPage + 1
+        );
 
     console.log(query);
-
     setIsFetching(true);
 
     const response = await getAllArtworks(query);
@@ -58,16 +65,33 @@ const Artworks = () => {
     }
   };
 
+  const fetchTotalPages = async () => {
+    const query = `/search?limit=9&query[match][artwork_type_title]=${tag}&[exists][field]=image_id`;
+
+    const response = await getTotalPages(query);
+
+    if (response.status === 200) {
+      setTotalPages(response.data.pagination.total_pages);
+    }
+  };
+
+  const splitArrayHandler = (array, page) => {
+    console.log(page);
+    setSplittedArray(splitArray(array, page === 1 ? 3 : 3 * page));
+  };
+
   useEffect(() => {
+    console.log('Initial');
     dispatch(clearArtworks());
-    fetchAllArtworks();
+    fetchAllArtworks(pageState);
   }, [location]);
 
   useEffect(() => {
-    setSplittedArray(
-      splitArray(artworksState, pageState === 1 ? 3 : 3 * pageState)
-    );
-  }, [artworksState, location]);
+    if (artworksState.length > 0) {
+      console.log('Split');
+      splitArrayHandler(artworksState, pageState);
+    }
+  }, [artworksState]);
 
   return (
     <section className='artworks__container'>
@@ -79,7 +103,7 @@ const Artworks = () => {
       {splittedArray && (
         <div className='artworks__gallery--outer'>
           <div className='artworks__gallery--inner'>
-            {splittedArray[0]?.map((artwork) => {
+            {splittedArray[0]?.map((artwork, index) => {
               return <ArtworkCard key={artwork.id} data={artwork} />;
             })}
           </div>
@@ -97,7 +121,13 @@ const Artworks = () => {
       )}
       <div className='artworks__button'>
         {artworksState.length > 0 && (
-          <Button block type='primary' onClick={fetchAllArtworks}>
+          <Button
+            block
+            type='primary'
+            onClick={() => {
+              fetchAllArtworks(pageState);
+            }}
+          >
             {isFetching ? <SpinComponent /> : 'Load More'}
           </Button>
         )}

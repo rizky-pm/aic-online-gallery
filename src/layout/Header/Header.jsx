@@ -6,7 +6,7 @@ import InputComponent from '../../components/InputComponent/InputComponent';
 
 import './Header.scss';
 
-import { getAllArtworks } from '../../api';
+import { getAllArtworks, getTotalPages } from '../../api';
 import {
   querySelector,
   randomNumberWithMinMax,
@@ -18,6 +18,7 @@ const PageLimit = 10;
 const Header = () => {
   const [headerData, setHeaderData] = useState({});
   const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   const location = useLocation().pathname;
   let tag = removeString(useLocation().pathname, '/t/');
@@ -27,9 +28,8 @@ const Header = () => {
     setPage((prevState) => prevState + 1);
 
     const query = tag.includes('/s/')
-      ? querySelector(location, (tag = ''), searchQuery, page)
-      : querySelector(location, tag, searchQuery);
-    console.log(query);
+      ? querySelector(location, (tag = ''), searchQuery, page, totalPages)
+      : querySelector(location, tag, searchQuery, page, totalPages);
 
     const response = await getAllArtworks(query);
 
@@ -38,9 +38,21 @@ const Header = () => {
     }
   };
 
+  const fetchTotalPages = async () => {
+    const query = `/search?limit=9&query[match][artwork_type_title]=${tag}&[exists][field]=image_id`;
+
+    const response = await getTotalPages(query);
+
+    if (response.status === 200) {
+      setTotalPages(response.data.pagination.total_pages);
+    }
+  };
+
   useEffect(() => {
+    setPage(1);
+    fetchTotalPages();
     fetchAllArtworks();
-  }, [tag]);
+  }, [location]);
 
   return (
     headerData && (

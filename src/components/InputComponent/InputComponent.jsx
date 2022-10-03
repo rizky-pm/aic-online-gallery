@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { SearchOutlined } from '@ant-design/icons';
 import { Input } from 'antd';
 import { useNavigate } from 'react-router-dom';
+
+import { resetPage } from '../../store/artworks.slice';
 
 import './InputComponent.scss';
 
@@ -10,10 +13,10 @@ const InputComponent = ({ type }) => {
   const [search, setSearch] = useState('');
   const navigate = useNavigate();
   const location = useLocation().pathname;
-
-  console.log(location);
+  const dispatch = useDispatch();
 
   const searchHandler = async () => {
+    console.log('Search Handler');
     navigate(`/s/${search}`);
   };
 
@@ -31,6 +34,7 @@ const InputComponent = ({ type }) => {
         <SearchOutlined
           onClick={() => {
             searchHandler();
+            dispatch(resetPage());
           }}
           className='input-search-component'
         />

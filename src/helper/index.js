@@ -49,10 +49,7 @@ export const querySelector = (location, tag, searchQuery, page) => {
       return `/search?${FIELDS_PARAM}&query${getQueryMatch(
         'artwork_type_title',
         tag
-      )}&${getQueryExists('image_id')}&page=${randomNumberWithMinMax(
-        1,
-        100
-      )}&limit=9`;
+      )}&${getQueryExists('image_id')}&page=${page}&limit=9`;
 
     case '/s/':
       return `/search?${FIELDS_PARAM}&query${getQueryExists(
@@ -60,9 +57,6 @@ export const querySelector = (location, tag, searchQuery, page) => {
       )}&page=${page}&q=${removeString(searchQuery)}&limit=9`;
 
     default:
-      return `/search?${FIELDS_PARAM}&page=${randomNumberWithMinMax(
-        1,
-        100
-      )}&limit=9`;
+      return `/search?${FIELDS_PARAM}&page=${page}&limit=9`;
   }
 };
