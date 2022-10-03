@@ -54,9 +54,11 @@ const Navbar = () => {
     <nav>
       <InputComponent onClick={scrollToPositionHandler} type='rounded' />
       <div className='nav__tag'>
-        <span className='nav__btn--left' onClick={scrollToLeft}>
-          <CaretLeftOutlined className='nav__btn--left__icon' />
-        </span>
+        {navbarData.length > 0 ? (
+          <span className='nav__btn--left' onClick={scrollToLeft}>
+            <CaretLeftOutlined className='nav__btn--left__icon' />
+          </span>
+        ) : null}
         <div className='link__wrapper' ref={navLinksRef}>
           <NavLink
             className={({ isActive }) =>
@@ -83,9 +85,11 @@ const Navbar = () => {
             </NavLink>
           ))}
         </div>
-        <span className='nav__btn--right' onClick={scrollRight}>
-          <CaretRightOutlined className='nav__btn--left__icon' />
-        </span>
+        {navbarData.length > 0 ? (
+          <span className='nav__btn--right' onClick={scrollRight}>
+            <CaretRightOutlined className='nav__btn--right__icon' />
+          </span>
+        ) : null}
       </div>
     </nav>
   );
