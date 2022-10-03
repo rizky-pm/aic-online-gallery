@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { CaretLeftOutlined, CaretRightOutlined } from '@ant-design/icons';
 
@@ -7,10 +7,16 @@ import { selectTag } from '../../store/tag.slice';
 import { clearArtworks, resetPage } from '../../store/artworks.slice';
 import './Navbar.scss';
 import InputComponent from '../../components/InputComponent/InputComponent';
+import { scrollToPosition } from '../../helper';
 
 const Navbar = () => {
   const navLinksRef = useRef(null);
   const dispatch = useDispatch();
+  const offsetState = useSelector((state) => state.artworks.refOffSet);
+
+  const scrollToPositionHandler = () => {
+    scrollToPosition(offsetState);
+  };
 
   const scrollToLeft = () => {
     navLinksRef.current.scrollLeft -= 300;
@@ -28,7 +34,7 @@ const Navbar = () => {
 
   return (
     <nav>
-      <InputComponent type='rounded' />
+      <InputComponent onClick={scrollToPositionHandler} type='rounded' />
       <div className='nav__tag'>
         <span className='nav__btn--left' onClick={scrollToLeft}>
           <CaretLeftOutlined className='nav__btn--left__icon' />

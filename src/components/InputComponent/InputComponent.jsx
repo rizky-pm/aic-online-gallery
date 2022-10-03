@@ -9,15 +9,15 @@ import { resetPage } from '../../store/artworks.slice';
 
 import './InputComponent.scss';
 
-const InputComponent = ({ type }) => {
+const InputComponent = ({ type, onClick }) => {
   const [search, setSearch] = useState('');
   const navigate = useNavigate();
   const location = useLocation().pathname;
   const dispatch = useDispatch();
 
   const searchHandler = async () => {
-    console.log('Search Handler');
     navigate(`/s/${search}`);
+    onClick();
   };
 
   useEffect(() => {

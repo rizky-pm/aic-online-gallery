@@ -60,3 +60,7 @@ export const querySelector = (location, tag, searchQuery, page) => {
       return `/search?${FIELDS_PARAM}&page=${page}&limit=9`;
   }
 };
+
+export const scrollToPosition = (position) => {
+  window.scrollTo({ top: position, behavior: 'smooth' });
+};

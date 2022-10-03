@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { Button } from 'antd';
@@ -18,6 +18,7 @@ import {
   fetched,
   fetchTotalPage,
   resetPage,
+  setRefOffSet,
 } from '../../store/artworks.slice';
 
 import './Artworks.scss';
@@ -35,10 +36,10 @@ const Artworks = () => {
   const location = useLocation().pathname;
   let tag = removeString(useLocation().pathname, '/t/');
   const searchQuery = removeString(useLocation().pathname, '/s/');
+  const sectionRef = useRef(null);
 
   const fetchAllArtworks = async (artworksPage) => {
     dispatch(addPage());
-    console.log({ artworksPage });
     const query = tag.includes('/s/')
       ? querySelector(
           location,
@@ -53,7 +54,6 @@ const Artworks = () => {
           artworksPage === 0 ? 1 : artworksPage + 1
         );
 
-    console.log(query);
     setIsFetching(true);
 
     const response = await getAllArtworks(query);
@@ -76,25 +76,26 @@ const Artworks = () => {
   };
 
   const splitArrayHandler = (array, page) => {
-    console.log(page);
     setSplittedArray(splitArray(array, page === 1 ? 3 : 3 * page));
   };
 
   useEffect(() => {
-    console.log('Initial');
     dispatch(clearArtworks());
     fetchAllArtworks(pageState);
+
+    if (sectionRef) {
+      dispatch(setRefOffSet(sectionRef.current.offsetTop));
+    }
   }, [location]);
 
   useEffect(() => {
     if (artworksState.length > 0) {
-      console.log('Split');
       splitArrayHandler(artworksState, pageState);
     }
   }, [artworksState]);
 
   return (
-    <section className='artworks__container'>
+    <section ref={sectionRef} className='artworks__container'>
       {includeString(tag, '/s/') && (
         <h1 className='artworks__title'>
           Showing results related to "{searchQuery}"

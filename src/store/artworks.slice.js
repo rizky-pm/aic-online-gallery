@@ -5,6 +5,7 @@ const initialState = {
   page: 0,
   totalData: 1,
   totalPage: 0,
+  refOffSet: 0,
 };
 
 const artworksSlice = createSlice({
@@ -31,6 +32,9 @@ const artworksSlice = createSlice({
     resetPage: (state) => {
       state.page = 0;
     },
+    setRefOffSet: (state, action) => {
+      state.refOffSet = action.payload;
+    },
   },
 });
 
@@ -42,4 +46,5 @@ export const {
   fetchTotalPage,
   addPage,
   resetPage,
+  setRefOffSet,
 } = artworksSlice.actions;

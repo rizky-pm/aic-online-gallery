@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import InputComponent from '../../components/InputComponent/InputComponent';
 
@@ -11,6 +12,7 @@ import {
   querySelector,
   randomNumberWithMinMax,
   removeString,
+  scrollToPosition,
 } from '../../helper';
 
 const PageLimit = 10;
@@ -23,6 +25,11 @@ const Header = () => {
   const location = useLocation().pathname;
   let tag = removeString(useLocation().pathname, '/t/');
   const searchQuery = removeString(useLocation().pathname, '/s/');
+  const offsetState = useSelector((state) => state.artworks.refOffSet);
+
+  const scrollToPositionHandler = () => {
+    scrollToPosition(offsetState);
+  };
 
   const fetchAllArtworks = async () => {
     setPage((prevState) => prevState + 1);
@@ -67,7 +74,7 @@ const Header = () => {
           <p className='header--content__desc'>
             Museum visit from anywhere and anywhen.
           </p>
-          <InputComponent type='default' />
+          <InputComponent type='default' onClick={scrollToPositionHandler} />
 
           {headerData && (
             <div className='header--content__credit'>
