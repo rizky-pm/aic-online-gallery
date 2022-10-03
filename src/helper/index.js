@@ -57,7 +57,9 @@ export const querySelector = (location, tag, searchQuery, page) => {
       )}&page=${page}&q=${removeString(searchQuery)}&limit=9`;
 
     default:
-      return `/search?${FIELDS_PARAM}&page=${page}&limit=9`;
+      return `/search?${FIELDS_PARAM}&query${getQueryExists(
+        'image_id'
+      )}&page=${page}&limit=9`;
   }
 };
 

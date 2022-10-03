@@ -17,7 +17,6 @@ import {
   clearArtworks,
   fetched,
   fetchTotalPage,
-  resetPage,
   setRefOffSet,
 } from '../../store/artworks.slice';
 
@@ -26,11 +25,11 @@ import SpinComponent from '../../components/SpinComponent/SpinComponent';
 
 const Artworks = () => {
   const [isFetching, setIsFetching] = useState(false);
-  const [totalPages, setTotalPages] = useState(1);
   const [splittedArray, setSplittedArray] = useState([]);
 
   const artworksState = useSelector((state) => state.artworks.data);
   const pageState = useSelector((state) => state.artworks.page);
+  const totalPageState = useSelector((state) => state.artworks.totalPage);
 
   const dispatch = useDispatch();
   const location = useLocation().pathname;
@@ -40,6 +39,7 @@ const Artworks = () => {
 
   const fetchAllArtworks = async (artworksPage) => {
     dispatch(addPage());
+    console.log({ artworksPage });
     const query = tag.includes('/s/')
       ? querySelector(
           location,
@@ -66,12 +66,15 @@ const Artworks = () => {
   };
 
   const fetchTotalPages = async () => {
-    const query = `/search?limit=9&query[match][artwork_type_title]=${tag}&[exists][field]=image_id`;
+    let page = 1;
 
+    const query = tag.includes('/s/')
+      ? querySelector(location, (tag = ''), searchQuery, page)
+      : querySelector(location, tag, searchQuery, page);
     const response = await getTotalPages(query);
 
     if (response.status === 200) {
-      setTotalPages(response.data.pagination.total_pages);
+      fetchTotalPage(response.data.pagination.total_pages);
     }
   };
 
@@ -82,6 +85,7 @@ const Artworks = () => {
   useEffect(() => {
     dispatch(clearArtworks());
     fetchAllArtworks(pageState);
+    fetchTotalPages();
 
     if (sectionRef) {
       dispatch(setRefOffSet(sectionRef.current.offsetTop));
@@ -121,7 +125,7 @@ const Artworks = () => {
         </div>
       )}
       <div className='artworks__button'>
-        {artworksState.length > 0 && (
+        {artworksState.length > 0 && pageState <= totalPageState ? (
           <Button
             block
             type='primary'
@@ -131,7 +135,7 @@ const Artworks = () => {
           >
             {isFetching ? <SpinComponent /> : 'Load More'}
           </Button>
-        )}
+        ) : null}
       </div>
     </section>
   );
