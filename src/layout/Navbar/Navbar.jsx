@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { CaretLeftOutlined, CaretRightOutlined } from '@ant-design/icons';
@@ -8,11 +8,25 @@ import { clearArtworks, resetPage } from '../../store/artworks.slice';
 import './Navbar.scss';
 import InputComponent from '../../components/InputComponent/InputComponent';
 import { scrollToPosition } from '../../helper';
+import { getAllArtworkTypes } from '../../api';
 
 const Navbar = () => {
+  const [isFetching, setIsFetching] = useState(false);
+  const [navbarData, setNavbarData] = useState([]);
+
   const navLinksRef = useRef(null);
   const dispatch = useDispatch();
   const offsetState = useSelector((state) => state.artworks.refOffSet);
+
+  const fetchAllArtworkTypes = async () => {
+    setIsFetching(true);
+    const res = await getAllArtworkTypes();
+    setIsFetching(false);
+
+    if (res.status === 200) {
+      setNavbarData(res.data.data);
+    }
+  };
 
   const scrollToPositionHandler = () => {
     scrollToPosition(offsetState);
@@ -32,6 +46,10 @@ const Navbar = () => {
     dispatch(selectTag(tag));
   };
 
+  useEffect(() => {
+    fetchAllArtworkTypes();
+  }, []);
+
   return (
     <nav>
       <InputComponent onClick={scrollToPositionHandler} type='rounded' />
@@ -50,96 +68,20 @@ const Navbar = () => {
           >
             Explore
           </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              (isActive ? 'navbar--link__active' : undefined) + ' navbar--link'
-            }
-            to='/t/paintings'
-            onClick={() => selectTagHandler('Paintings')}
-          >
-            Paintings
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              (isActive ? 'navbar--link__active' : undefined) + ' navbar--link'
-            }
-            to='/t/sculptures'
-            onClick={() => selectTagHandler('Sculptures')}
-          >
-            Sculptures
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              (isActive ? 'navbar--link__active' : undefined) + ' navbar--link'
-            }
-            to='/t/graphic-designs'
-            onClick={() => selectTagHandler('Graphic Designs')}
-          >
-            Graphic Designs
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              (isActive ? 'navbar--link__active' : undefined) + ' navbar--link'
-            }
-            to='/t/photograph'
-            onClick={() => selectTagHandler('Photograph')}
-          >
-            Photograph
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              (isActive ? 'navbar--link__active' : undefined) + ' navbar--link'
-            }
-            to='/t/mixed-media'
-            onClick={() => selectTagHandler('Mixed Media')}
-          >
-            Mixed Media
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              (isActive ? 'navbar--link__active' : undefined) + ' navbar--link'
-            }
-            to='/t/textile'
-            onClick={() => selectTagHandler('Textile')}
-          >
-            Textile
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              (isActive ? 'navbar--link__active' : undefined) + ' navbar--link'
-            }
-            to='/t/furniture'
-            onClick={() => selectTagHandler('Furniture')}
-          >
-            Furniture
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              (isActive ? 'navbar--link__active' : undefined) + ' navbar--link'
-            }
-            to='/t/mask'
-            onClick={() => selectTagHandler('Mask')}
-          >
-            Mask
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              (isActive ? 'navbar--link__active' : undefined) + ' navbar--link'
-            }
-            to='/t/decorative-arts'
-            onClick={() => selectTagHandler('Decorative Arts')}
-          >
-            Decorative Arts
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              (isActive ? 'navbar--link__active' : undefined) + ' navbar--link'
-            }
-            to='/t/book'
-            onClick={() => selectTagHandler('Book')}
-          >
-            Book
-          </NavLink>
+          {navbarData?.map((item) => (
+            <NavLink
+              key={item.id}
+              className={({ isActive }) =>
+                (isActive ? 'navbar--link__active' : undefined) +
+                ' navbar--link'
+              }
+              end
+              to={`/t/${item.title}`}
+              onClick={() => selectTagHandler('')}
+            >
+              {item.title}
+            </NavLink>
+          ))}
         </div>
         <span className='nav__btn--right' onClick={scrollRight}>
           <CaretRightOutlined className='nav__btn--left__icon' />
