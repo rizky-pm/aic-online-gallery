@@ -61,38 +61,36 @@ const Header = () => {
     fetchAllArtworks();
   }, [location]);
 
-  return (
-    headerData && (
-      <header
-        style={{
-          backgroundImage: `url(https://www.artic.edu/iiif/2/${headerData?.image_id}/full/843,/0/default.jpg)`,
-        }}
-      >
-        <div className='header--overlay'></div>
-        <div className='header--content'>
-          <h1 className='header--content__title'>Artlerry</h1>
-          <p className='header--content__desc'>
-            Museum visit from anywhere and anywhen.
-          </p>
-          <InputComponent type='default' onClick={scrollToPositionHandler} />
+  return headerData?.image_id ? (
+    <header
+      style={{
+        backgroundImage: `url(https://www.artic.edu/iiif/2/${headerData?.image_id}/full/843,/0/default.jpg)`,
+      }}
+    >
+      <div className='header--overlay'></div>
+      <div className='header--content'>
+        <h1 className='header--content__title'>Artlerry</h1>
+        <p className='header--content__desc'>
+          Museum visit from anywhere and anywhen.
+        </p>
+        <InputComponent type='default' onClick={scrollToPositionHandler} />
 
-          {headerData && (
-            <div className='header--content__credit'>
-              <p className='header--content__credit--artist'>
-                By {headerData?.artist_title}
-              </p>
-              <Link
-                to={`/artwork/${headerData.id}`}
-                className='header--content__credit--title'
-              >
-                {headerData?.title}
-              </Link>
-            </div>
-          )}
-        </div>
-      </header>
-    )
-  );
+        {headerData && (
+          <div className='header--content__credit'>
+            <p className='header--content__credit--artist'>
+              By {headerData?.artist_title}
+            </p>
+            <Link
+              to={`/artwork/${headerData.id}`}
+              className='header--content__credit--title'
+            >
+              {headerData?.title}
+            </Link>
+          </div>
+        )}
+      </div>
+    </header>
+  ) : null;
 };
 
 export default Header;

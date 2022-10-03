@@ -39,7 +39,6 @@ const Artworks = () => {
 
   const fetchAllArtworks = async (artworksPage) => {
     dispatch(addPage());
-    console.log({ artworksPage });
     const query = tag.includes('/s/')
       ? querySelector(
           location,
