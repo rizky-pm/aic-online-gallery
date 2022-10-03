@@ -15,8 +15,6 @@ import {
   scrollToPosition,
 } from '../../helper';
 
-const PageLimit = 10;
-
 const Header = () => {
   const [headerData, setHeaderData] = useState({});
   const [page, setPage] = useState(1);
@@ -38,10 +36,13 @@ const Header = () => {
       ? querySelector(location, (tag = ''), searchQuery, page, totalPages)
       : querySelector(location, tag, searchQuery, page, totalPages);
 
+    console.log(query);
+
     const response = await getAllArtworks(query);
+    console.log(response);
 
     if (response.status === 200) {
-      setHeaderData(response.data.data[randomNumberWithMinMax(0, PageLimit)]);
+      setHeaderData(response.data.data[randomNumberWithMinMax(0, 9)]);
     }
   };
 
