@@ -7,7 +7,6 @@ header {
     background-size: cover;
     background-position: center;
     height: 90vh;
-    width: 100%;
 }
 
 .header__searchbar {
@@ -28,27 +27,52 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    // align-items: center;
     height: 100%;
     padding: 0 250px;
     color: $color-light;
-    // text-align: center;
+    gap: 5px;
+
+    @include devices(mobile) {
+        padding: 0 25px;
+    }
+    
+    @include devices(tablet) {
+        padding: 0 125px;
+        gap: 10px;
+    }
 
     &__title {
         font-size: 36px;
         font-weight: 700;
         color: $color-light;
+
+        @include devices(mobile) {
+            font-size: 30px;
+        }
     }
 
     &__desc {
         font-size: 20px;
         color: $color-light;
+
+        
+        @include devices(mobile) {
+            font-size: 18px;
+        }
     }
 
     &__credit {
         position: absolute;
         bottom: 2%;
         left: 1%;
+
+        @include devices(mobile) {
+            left: 25px;
+        }
+
+        @include devices(tablet) {
+            left: 5%;
+        }
 
         &--artist {
             color: $color-light;
