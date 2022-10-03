@@ -61,7 +61,7 @@ const ArtworkCard = ({ data }) => {
       {artworkDetail?.image_id ? (
         <div className='artwork__image'>
           <img
-            src={`${IIIF_URL}${artworkDetail?.image_id}/full/843,/0/default.jpg`}
+            src={`${IIIF_URL}${artworkDetail?.image_id}/full/425,/0/default.jpg`}
             alt=''
             className='artwork__image'
             loading='lazy'
