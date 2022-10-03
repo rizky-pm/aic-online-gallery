@@ -51,24 +51,28 @@ const Detail = () => {
             <p className='detail__header__artist'>By {data?.artist_title}</p>
           </div>
           <div className='detail__wrapper__image'>
-            <img
-              src={`${IIIF_URL}${data?.image_id}/full/843,/0/default.jpg`}
-              alt=''
-              className='detail__image'
-              loading='lazy'
-              onClick={imageClickHandler}
-            />
-            <a
-              ref={imageLinkRef}
-              href={`${IIIF_URL}${data?.image_id}/full/843,/0/default.jpg`}
-              target='_blank'
-              rel='noopener noreferrer'
-              style={{
-                display: 'none',
-              }}
-            >
-              Open in new tab
-            </a>
+            {data?.image_id ? (
+              <>
+                <img
+                  src={`${IIIF_URL}${data?.image_id}/full/843,/0/default.jpg`}
+                  alt=''
+                  className='detail__image'
+                  loading='lazy'
+                  onClick={imageClickHandler}
+                />
+                <a
+                  ref={imageLinkRef}
+                  href={`${IIIF_URL}${data?.image_id}/full/843,/0/default.jpg`}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  style={{
+                    display: 'none',
+                  }}
+                >
+                  Open in new tab
+                </a>
+              </>
+            ) : null}
           </div>
           <p className='detail__description'>{data?.thumbnail.alt_text}</p>
         </section>
