@@ -9,6 +9,42 @@ nav {
     background-color: $color-dark;
     padding: 0 20px;
     height: 10vh;
+
+    @include devices(mobile) {
+        padding: 25px;
+        gap: 10px;
+        transform-origin: top bottom left right;
+
+        
+
+        &.nav__menu--close {
+            &::before {
+                content: "";
+                position: absolute;
+                height: 1px;
+                width: 100%;
+                bottom: 0;
+                left: 0;
+                background-color: $color-light;
+                transform: scaleX(0);
+                transition: all 0.5s ease-in-out;
+            }
+        }
+
+        &.nav__menu--open {
+            &::before {
+                content: "";
+                position: absolute;
+                height: 1px;
+                width: 100%;
+                bottom: 0;
+                left: 0;
+                background-color: $color-light;
+                transform: scaleX(1);
+                transition: all 0.5s ease-in-out;
+            }
+        }
+    }
 }
 
 .link__wrapper {
@@ -18,12 +54,43 @@ nav {
     align-items: center;
     white-space: nowrap;
     scroll-behavior: smooth !important;
+
+    @include devices(mobile) {
+        display: none;
+        // flex-direction: column;
+        // justify-content: center;
+        // height: 100vh;
+        // width: 100vw;
+        // position: fixed;
+        // top: 0;
+        // left: 0;
+        // background-color: $color-dark;
+        // transition: transform 0.3s ease-in-out;
+        // transform: translateX(-100%);
+        // z-index: 5;
+    }
 }
 
 .nav__tag {
     position: relative;
     width: 60%;
     display: flex;
+
+    @include devices(mobile) {
+        width: 20%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    @include devices(tablet) {
+        width: 50%;
+    }
+
+    &--hamburger {
+        @include devices(tablet) {
+            display: none;
+        }
+    }
 }
 
 .nav__btn {
@@ -34,6 +101,11 @@ nav {
     &--left {
         display: flex;
         align-items: center;
+
+        
+        @include devices(mobile) {
+            display: none;
+        }
 
         &__icon {
             cursor: pointer;
@@ -52,6 +124,11 @@ nav {
     &--right {
         display: flex;
         align-items: center;
+
+        
+        @include devices(mobile) {
+            display: none;
+        }
 
         &__icon {
             cursor: pointer;

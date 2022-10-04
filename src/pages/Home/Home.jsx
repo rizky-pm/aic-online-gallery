@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 
 import { getAllArtworks } from '../../api';
@@ -8,6 +8,7 @@ import { fetchTotalData, fetchTotalPage } from '../../store/artworks.slice';
 import Header from '../../layout/Header/Header';
 
 import './Home.scss';
+import OverlayMenu from '../../components/OverlayMenu/OverlayMenu';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ const Home = () => {
     <section className='home__container'>
       <Header />
       <Outlet />
+      <OverlayMenu />
     </section>
   );
 };

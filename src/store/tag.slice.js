@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  data: null,
+  data: [],
+  selectedData: null,
 };
 
 const tagSlice = createSlice({
@@ -9,13 +10,16 @@ const tagSlice = createSlice({
   initialState,
   reducers: {
     selectTag: (state, action) => {
-      state.data = action.payload;
+      state.selectedData = action.payload;
     },
     removeTag: (state) => {
-      state.data = null;
+      state.selectedData = null;
+    },
+    fetchTagData: (state, action) => {
+      state.data = action.payload;
     },
   },
 });
 
 export default tagSlice.reducer;
-export const { selectTag } = tagSlice.actions;
+export const { selectTag, fetchTagData } = tagSlice.actions;

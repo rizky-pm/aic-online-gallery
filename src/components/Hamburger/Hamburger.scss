@@ -1,0 +1,44 @@
+@import "../../styles/main.scss";
+
+.hamburger__container {
+    &:hover {
+        cursor: pointer;
+        .hamburger__line {
+            background-color: $color-primary;
+            transition: all 0.3s ease-in-out;
+        }
+    }
+
+}
+
+.hamburger__line {
+    transition: all 0.3s ease-in-out;
+
+    @for $i from 1 through 3 {
+        &:nth-of-type(#{$i}) {
+            width: 30px;
+            background-color: $color-light;
+            height: 2px;
+            display: block;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+    }
+
+    // &--active {
+    //     @for $i from 1 through 3 {
+    //         &:nth-of-type(#{$i}) {
+    //             @if ($i == 1) {
+    //                 transform: rotate(45deg);
+    //                 transform-origin: left;
+    //             } @else if ($i == 2) {
+    //                 opacity: 0;
+    //             } @else if ($i == 3) {
+    //                 transform: rotate(-45deg);
+    //                 transform-origin: left;
+    //             }
+    //         }
+    //     }
+    // }
+    
+}

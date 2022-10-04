@@ -2,6 +2,23 @@
 
 .home {
     &__container {
+        position: relative;
         margin-top: 10vh;
+    }
+
+    &__overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(17, 20, 25, 1);
+        height: 100vh;
+        width: 100%;
+        transform: translateY(-100%);
+        transition: transform 0.5s ease-in-out;
+
+        &--active {
+            transform: translateY(0);
+            transition: transform 0.5s ease-in-out;
+        }
     }
 }
