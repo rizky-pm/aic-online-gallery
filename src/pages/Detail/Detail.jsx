@@ -56,7 +56,7 @@ const Detail = () => {
             {data?.image_id ? (
               <>
                 <img
-                  src={`${IIIF_URL}${data?.image_id}/full/843,/0/default.jpg`}
+                  src={`${IIIF_URL}${data?.image_id}/full/1686,/0/default.jpg`}
                   alt=''
                   className='detail__image'
                   loading='lazy'
@@ -64,7 +64,7 @@ const Detail = () => {
                 />
                 <a
                   ref={imageLinkRef}
-                  href={`${IIIF_URL}${data?.image_id}/full/843,/0/default.jpg`}
+                  href={`${IIIF_URL}${data?.image_id}/full/1686,/0/default.jpg`}
                   target='_blank'
                   rel='noopener noreferrer'
                   style={{
