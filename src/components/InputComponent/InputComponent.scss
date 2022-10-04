@@ -34,6 +34,10 @@
     @include devices(mobile) {
         width: 100% !important;
         margin: 0;
+
+        ::placeholder {
+            font-size: 12px;
+        }
     }
 
     .ant-input {

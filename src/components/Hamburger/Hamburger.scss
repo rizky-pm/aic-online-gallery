@@ -16,7 +16,7 @@
 
     @for $i from 1 through 3 {
         &:nth-of-type(#{$i}) {
-            width: 30px;
+            width: 35px;
             background-color: $color-light;
             height: 2px;
             display: block;
@@ -24,21 +24,19 @@
             margin-bottom: 0.5rem;
         }
     }
+}
 
-    // &--active {
-    //     @for $i from 1 through 3 {
-    //         &:nth-of-type(#{$i}) {
-    //             @if ($i == 1) {
-    //                 transform: rotate(45deg);
-    //                 transform-origin: left;
-    //             } @else if ($i == 2) {
-    //                 opacity: 0;
-    //             } @else if ($i == 3) {
-    //                 transform: rotate(-45deg);
-    //                 transform-origin: left;
-    //             }
-    //         }
-    //     }
-    // }
-    
+.hamburger__line--active {
+    @for $i from 1 through 3 {
+        &:nth-of-type(#{$i}) {
+            @if $i == 1 {
+                transform: rotate(45deg) translate(7px, 7px);
+            } @else if $i == 2 {
+                transform: scaleX(0);
+                transform-origin: center;
+            } @else if $i == 3 {
+                transform: rotate(-45deg) translate(7px, -7px);
+            }
+        }
+    }
 }
