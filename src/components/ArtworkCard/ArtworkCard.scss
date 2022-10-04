@@ -2,6 +2,7 @@
 
 .artwork {
     position: relative;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 
     &:hover {
         cursor: pointer;
@@ -9,36 +10,54 @@
     
     
     &--overlay {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color:$color-light;
         padding: 10px;
-        opacity: 0;
-        height: 100%;
-        width: 100%;
-        transition: all 0.3s ease;
 
+        @include devices(tablet) {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            height: 100%;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        
         &__hovered {
             opacity: 1;
             transition: all 0.3s ease;
         }
 
         &--meta {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            padding: 10px;
+            position: inherit;
+            color: $color-dark;
+
+            @include devices(tablet) {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                padding: 10px;
+            }
 
             
             &__artist {
-                color: $color-light;
-                font-weight: 700;
-                font-size: 18px;
+                font-weight: 600;
+                font-size: 16px;
+
+                @include devices(tablet) {
+                    color: $color-light;
+                    font-weight: 700;
+                    font-size: 18px;
+                }
             }
 
             &__title {
-                color: $color-light;
+
+                @include devices(tablet) {
+                    color: $color-light;
+                }
             }
         }
 

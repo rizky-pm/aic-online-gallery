@@ -48,16 +48,6 @@ const ArtworkCard = ({ data }) => {
         display: artworkDetail?.image_id ? 'block' : 'none',
       }}
     >
-      <div
-        className={`${
-          isHovered ? 'artwork--overlay__hovered' : ''
-        } artwork--overlay`}
-      >
-        <div className='artwork--overlay--meta'>
-          <p className='artwork--overlay--meta__artist'>{data.artist_title}</p>
-          <p className='artwork--overlay--meta__title'>{data.title}</p>
-        </div>
-      </div>
       {artworkDetail?.image_id ? (
         <div className='artwork__image'>
           <img
@@ -76,6 +66,16 @@ const ArtworkCard = ({ data }) => {
           No Image
         </h1>
       )}
+      <div
+        className={`${
+          isHovered ? 'artwork--overlay__hovered' : ''
+        } artwork--overlay`}
+      >
+        <div className='artwork--overlay--meta'>
+          <p className='artwork--overlay--meta__artist'>{data.artist_title}</p>
+          <p className='artwork--overlay--meta__title'>{data.title}</p>
+        </div>
+      </div>
     </div>
   );
 };
