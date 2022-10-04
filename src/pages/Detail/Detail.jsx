@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { getArtworkById } from '../../api';
+import OverlayMenu from '../../components/OverlayMenu/OverlayMenu';
 import { IIIF_URL } from '../../constants';
 import './Detail.scss';
 
@@ -79,6 +80,7 @@ const Detail = () => {
           <p className='detail__description'>{data?.thumbnail.alt_text}</p>
         </section>
       )}
+      <OverlayMenu />
     </>
   );
 };
