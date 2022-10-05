@@ -36,10 +36,7 @@ const Header = () => {
       ? querySelector(location, (tag = ''), searchQuery, page, totalPages)
       : querySelector(location, tag, searchQuery, page, totalPages);
 
-    console.log(query);
-
     const response = await getAllArtworks(query);
-    console.log(response);
 
     if (response.status === 200) {
       setHeaderData(response.data.data[randomNumberWithMinMax(0, 9)]);

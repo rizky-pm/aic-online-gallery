@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { Button } from 'antd';
 
 import ArtworkCard from '../../components/ArtworkCard/ArtworkCard';
@@ -33,6 +33,9 @@ const Artworks = () => {
 
   const dispatch = useDispatch();
   const location = useLocation().pathname;
+  const { keyword } = useParams();
+  console.log(keyword);
+
   let tag = removeString(useLocation().pathname, '/t/');
   const searchQuery = removeString(useLocation().pathname, '/s/');
   const sectionRef = useRef(null);
@@ -56,12 +59,13 @@ const Artworks = () => {
     setIsFetching(true);
 
     const response = await getAllArtworks(query);
-    setIsFetching(false);
 
     if (response.status === 200) {
       dispatch(fetched(response.data.data));
       dispatch(fetchTotalPage(response.data.pagination.total_pages));
     }
+
+    setIsFetching(false);
   };
 
   const fetchTotalPages = async () => {
@@ -82,6 +86,7 @@ const Artworks = () => {
   };
 
   useEffect(() => {
+    console.log('Called');
     dispatch(clearArtworks());
     fetchAllArtworks(pageState);
     fetchTotalPages();
@@ -89,7 +94,7 @@ const Artworks = () => {
     if (sectionRef) {
       dispatch(setRefOffSet(sectionRef.current.offsetTop));
     }
-  }, [location]);
+  }, [location, keyword]);
 
   useEffect(() => {
     if (artworksState.length > 0) {

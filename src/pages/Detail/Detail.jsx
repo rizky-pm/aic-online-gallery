@@ -11,8 +11,6 @@ const Detail = () => {
   const [data, setData] = useState(null);
   const { artworkId } = useParams();
 
-  console.log(data);
-
   const imageLinkRef = useRef(null);
 
   const fetchArtworkById = async () => {

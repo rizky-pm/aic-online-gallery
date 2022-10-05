@@ -15,8 +15,9 @@ const InputComponent = ({ type, onClick }) => {
   const location = useLocation().pathname;
   const dispatch = useDispatch();
 
-  const searchHandler = async () => {
-    navigate(`/s/${search}`);
+  const searchHandler = async (searchKeyword) => {
+    navigate(`/s/${searchKeyword}`, { replace: true });
+    dispatch(resetPage());
     onClick();
   };
 
@@ -33,8 +34,7 @@ const InputComponent = ({ type, onClick }) => {
       prefix={
         <SearchOutlined
           onClick={() => {
-            searchHandler();
-            dispatch(resetPage());
+            searchHandler(search);
           }}
           className='input-search-component'
         />
