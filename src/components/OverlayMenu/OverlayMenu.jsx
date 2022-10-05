@@ -32,7 +32,6 @@ const OverlayMenu = () => {
       <div className='home__overlay--content'>
         <Link
           className='menu--link'
-          end
           to='/'
           onClick={() => selectTagHandler('')}
         >
@@ -42,7 +41,6 @@ const OverlayMenu = () => {
           <Link
             key={item.id}
             className='menu--link'
-            end
             to={`/t/${item.title}`}
             onClick={() => selectTagHandler('')}
           >

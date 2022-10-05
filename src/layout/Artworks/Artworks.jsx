@@ -17,6 +17,7 @@ import {
   clearArtworks,
   fetched,
   fetchTotalPage,
+  resetPage,
   setRefOffSet,
 } from '../../store/artworks.slice';
 
@@ -34,7 +35,6 @@ const Artworks = () => {
   const dispatch = useDispatch();
   const location = useLocation().pathname;
   const { keyword } = useParams();
-  console.log(keyword);
 
   let tag = removeString(useLocation().pathname, '/t/');
   const searchQuery = removeString(useLocation().pathname, '/s/');
@@ -86,7 +86,10 @@ const Artworks = () => {
   };
 
   useEffect(() => {
-    console.log('Called');
+    dispatch(resetPage());
+  }, []);
+
+  useEffect(() => {
     dispatch(clearArtworks());
     fetchAllArtworks(pageState);
     fetchTotalPages();

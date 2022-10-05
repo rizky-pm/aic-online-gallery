@@ -1,25 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { SearchOutlined } from '@ant-design/icons';
 import { Input } from 'antd';
-import { useNavigate } from 'react-router-dom';
-
-import { resetPage } from '../../store/artworks.slice';
+import { Link } from 'react-router-dom';
 
 import './InputComponent.scss';
 
 const InputComponent = ({ type, onClick }) => {
   const [search, setSearch] = useState('');
-  const navigate = useNavigate();
   const location = useLocation().pathname;
-  const dispatch = useDispatch();
-
-  const searchHandler = async (searchKeyword) => {
-    navigate(`/s/${searchKeyword}`, { replace: true });
-    dispatch(resetPage());
-    onClick();
-  };
 
   useEffect(() => {
     setSearch('');
@@ -32,12 +21,14 @@ const InputComponent = ({ type, onClick }) => {
       }}
       value={search}
       prefix={
-        <SearchOutlined
+        <Link
           onClick={() => {
-            searchHandler(search);
+            onClick();
           }}
-          className='input-search-component'
-        />
+          to={`/s/${search}`}
+        >
+          <SearchOutlined className='input-search-component' />
+        </Link>
       }
       className={type}
       placeholder='Search by artist, title, or keyword'
