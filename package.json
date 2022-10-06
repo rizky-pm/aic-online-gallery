@@ -1,5 +1,6 @@
 {
   "name": "aic-online-museum",
+  "homepage": "https://rizky-pm.github.io/aic-online-gallery/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -24,7 +25,9 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "craco eject"
+    "eject": "craco eject",
+    "predeploy": "craco build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -43,5 +46,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^4.0.0"
   }
 }
