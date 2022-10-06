@@ -62,7 +62,7 @@ const Header = () => {
     fetchAllArtworks();
   }, [location]);
 
-  return headerData?.image_id ? (
+  return (
     <header
       style={{
         backgroundImage: `url(https://www.artic.edu/iiif/2/${headerData?.image_id}/full/843,/0/default.jpg)`,
@@ -91,7 +91,7 @@ const Header = () => {
         )}
       </div>
     </header>
-  ) : null;
+  );
 };
 
 export default Header;
