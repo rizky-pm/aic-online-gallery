@@ -36,13 +36,16 @@ const Artworks = () => {
   const location = useLocation().pathname;
   const { keyword } = useParams();
 
-  let tag = removeString(useLocation().pathname, '/t/');
-  const searchQuery = removeString(useLocation().pathname, '/s/');
+  let tag = removeString(useLocation().pathname, '/aic-online-gallery/t/');
+  const searchQuery = removeString(
+    useLocation().pathname,
+    '/aic-online-gallery/s/'
+  );
   const sectionRef = useRef(null);
 
   const fetchAllArtworks = async (artworksPage) => {
     dispatch(addPage());
-    const query = tag.includes('/s/')
+    const query = tag.includes('/aic-online-gallery/s/')
       ? querySelector(
           location,
           (tag = ''),
@@ -71,7 +74,7 @@ const Artworks = () => {
   const fetchTotalPages = async () => {
     let page = 1;
 
-    const query = tag.includes('/s/')
+    const query = tag.includes('/aic-online-gallery/s/')
       ? querySelector(location, (tag = ''), searchQuery, page)
       : querySelector(location, tag, searchQuery, page);
     const response = await getTotalPages(query);
@@ -107,7 +110,7 @@ const Artworks = () => {
 
   return (
     <section ref={sectionRef} className='artworks__container'>
-      {includeString(tag, '/s/') && (
+      {includeString(tag, '/aic-online-gallery/s/') && (
         <h1 className='artworks__title'>
           Showing results related to "{searchQuery}"
         </h1>

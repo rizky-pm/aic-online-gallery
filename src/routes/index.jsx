@@ -9,12 +9,15 @@ const Router = () => {
   return (
     <>
       <Routes>
-        <Route path='/' element={<Home />}>
-          <Route path='/t/:tag' element={<Artworks />} />
-          <Route path='/s/:keyword' element={<Artworks />} />
-          <Route path='/' element={<Artworks />} />
+        <Route path='/aic-online-gallery/' element={<Home />}>
+          <Route path='t/:tag' element={<Artworks />} />
+          <Route path='s/:keyword' element={<Artworks />} />
+          <Route path='/aic-online-gallery/' index element={<Artworks />} />
         </Route>
-        <Route path='/artwork/:artworkId' element={<Detail />} />
+        <Route
+          path='aic-online-gallery/artwork/:artworkId'
+          element={<Detail />}
+        />
       </Routes>
     </>
   );

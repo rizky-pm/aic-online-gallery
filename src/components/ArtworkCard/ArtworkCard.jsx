@@ -27,7 +27,7 @@ const ArtworkCard = ({ data }) => {
   };
 
   const onClickHandler = () => {
-    navigate('/artwork/' + data.id);
+    navigate('/aic-online-gallery/artwork/' + data.id);
   };
 
   useEffect(() => {
