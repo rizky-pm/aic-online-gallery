@@ -13,12 +13,16 @@ import {
   randomNumberWithMinMax,
   removeString,
   scrollToPosition,
+  uniqueRandomNumber,
 } from '../../helper';
 
 const Header = () => {
   const [headerData, setHeaderData] = useState({});
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [usedPage, setUsedPage] = useState([]);
+
+  const totalPageState = useSelector((state) => state.artworks.totalPage);
 
   const location = useLocation().pathname;
   let tag = removeString(useLocation().pathname, '/aic-online-gallery/t/');
@@ -36,8 +40,28 @@ const Header = () => {
     setPage((prevState) => prevState + 1);
 
     const query = tag.includes('/aic-online-gallery/s/')
-      ? querySelector(location, (tag = ''), searchQuery, page, totalPages)
-      : querySelector(location, tag, searchQuery, page, totalPages);
+      ? querySelector(
+          location,
+          (tag = ''),
+          searchQuery,
+          uniqueRandomNumber(
+            0,
+            totalPageState > 100 ? totalPageState : 100,
+            usedPage,
+            setUsedPage
+          )
+        )
+      : querySelector(
+          location,
+          tag,
+          searchQuery,
+          uniqueRandomNumber(
+            0,
+            totalPageState > 100 ? totalPageState : 100,
+            usedPage,
+            setUsedPage
+          )
+        );
 
     const response = await getAllArtworks(query);
 

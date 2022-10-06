@@ -9,8 +9,10 @@ import { getAllArtworks, getTotalPages } from '../../api';
 import {
   includeString,
   querySelector,
+  randomNumberWithMinMax,
   removeString,
   splitArray,
+  uniqueRandomNumber,
 } from '../../helper';
 import {
   addPage,
@@ -27,6 +29,7 @@ import SpinComponent from '../../components/SpinComponent/SpinComponent';
 const Artworks = () => {
   const [isFetching, setIsFetching] = useState(false);
   const [splittedArray, setSplittedArray] = useState([]);
+  const [usedPage, setUsedPage] = useState([]);
 
   const artworksState = useSelector((state) => state.artworks.data);
   const pageState = useSelector((state) => state.artworks.page);
@@ -50,13 +53,23 @@ const Artworks = () => {
           location,
           (tag = ''),
           searchQuery,
-          artworksPage === 0 ? 1 : artworksPage + 1
+          uniqueRandomNumber(
+            0,
+            totalPageState > 100 ? 100 : totalPageState,
+            usedPage,
+            setUsedPage
+          )
         )
       : querySelector(
           location,
           tag,
           searchQuery,
-          artworksPage === 0 ? 1 : artworksPage + 1
+          uniqueRandomNumber(
+            0,
+            totalPageState > 100 ? totalPageState : 100,
+            usedPage,
+            setUsedPage
+          )
         );
 
     setIsFetching(true);
@@ -81,6 +94,7 @@ const Artworks = () => {
 
     if (response.status === 200) {
       fetchTotalPage(response.data.pagination.total_pages);
+      console.log(response.data.pagination.total_pages);
     }
   };
 
