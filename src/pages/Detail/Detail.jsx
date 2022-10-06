@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { getArtworkById } from '../../api';
 import OverlayMenu from '../../components/OverlayMenu/OverlayMenu';
 import { IIIF_URL } from '../../constants';
+import Footer from '../../layout/Footer/Footer';
 import './Detail.scss';
 
 const Detail = () => {
@@ -79,6 +80,7 @@ const Detail = () => {
         </section>
       )}
       <OverlayMenu />
+      <Footer />
     </>
   );
 };

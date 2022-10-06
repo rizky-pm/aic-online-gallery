@@ -9,6 +9,7 @@ import Header from '../../layout/Header/Header';
 
 import './Home.scss';
 import OverlayMenu from '../../components/OverlayMenu/OverlayMenu';
+import Footer from '../../layout/Footer/Footer';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ const Home = () => {
       <Header />
       <Outlet />
       <OverlayMenu />
+      <Footer />
     </section>
   );
 };
