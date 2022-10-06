@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/rizky-pm.github.io/aic-online-gallery/static/css/main.fe2dd73b.css",
-    "main.js": "/rizky-pm.github.io/aic-online-gallery/static/js/main.74a06eef.js",
-    "static/js/787.226dbd25.chunk.js": "/rizky-pm.github.io/aic-online-gallery/static/js/787.226dbd25.chunk.js",
-    "index.html": "/rizky-pm.github.io/aic-online-gallery/index.html",
-    "main.fe2dd73b.css.map": "/rizky-pm.github.io/aic-online-gallery/static/css/main.fe2dd73b.css.map",
-    "main.74a06eef.js.map": "/rizky-pm.github.io/aic-online-gallery/static/js/main.74a06eef.js.map",
-    "787.226dbd25.chunk.js.map": "/rizky-pm.github.io/aic-online-gallery/static/js/787.226dbd25.chunk.js.map"
+    "main.css": "/aic-online-gallery/static/css/main.fe2dd73b.css",
+    "main.js": "/aic-online-gallery/static/js/main.2e2e4381.js",
+    "static/js/787.226dbd25.chunk.js": "/aic-online-gallery/static/js/787.226dbd25.chunk.js",
+    "index.html": "/aic-online-gallery/index.html",
+    "main.fe2dd73b.css.map": "/aic-online-gallery/static/css/main.fe2dd73b.css.map",
+    "main.2e2e4381.js.map": "/aic-online-gallery/static/js/main.2e2e4381.js.map",
+    "787.226dbd25.chunk.js.map": "/aic-online-gallery/static/js/787.226dbd25.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.fe2dd73b.css",
-    "static/js/main.74a06eef.js"
+    "static/js/main.2e2e4381.js"
   ]
 }
