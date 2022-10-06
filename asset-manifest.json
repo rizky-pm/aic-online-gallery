@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.fe2dd73b.css",
-    "main.js": "/static/js/main.5bd6da04.js",
-    "static/js/787.226dbd25.chunk.js": "/static/js/787.226dbd25.chunk.js",
-    "index.html": "/index.html",
-    "main.fe2dd73b.css.map": "/static/css/main.fe2dd73b.css.map",
-    "main.5bd6da04.js.map": "/static/js/main.5bd6da04.js.map",
-    "787.226dbd25.chunk.js.map": "/static/js/787.226dbd25.chunk.js.map"
+    "main.css": "/aic-gallery-online/static/css/main.fe2dd73b.css",
+    "main.js": "/aic-gallery-online/static/js/main.19ae2b86.js",
+    "static/js/787.226dbd25.chunk.js": "/aic-gallery-online/static/js/787.226dbd25.chunk.js",
+    "index.html": "/aic-gallery-online/index.html",
+    "main.fe2dd73b.css.map": "/aic-gallery-online/static/css/main.fe2dd73b.css.map",
+    "main.19ae2b86.js.map": "/aic-gallery-online/static/js/main.19ae2b86.js.map",
+    "787.226dbd25.chunk.js.map": "/aic-gallery-online/static/js/787.226dbd25.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.fe2dd73b.css",
-    "static/js/main.5bd6da04.js"
+    "static/js/main.19ae2b86.js"
   ]
 }
