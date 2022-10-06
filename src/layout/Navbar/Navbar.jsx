@@ -70,6 +70,7 @@ const Navbar = () => {
             className={({ isActive }) =>
               (isActive ? 'navbar--link__active' : undefined) + ' navbar--link'
             }
+            end
             to='/'
             onClick={() => selectTagHandler('')}
           >
