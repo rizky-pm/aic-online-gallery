@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/aic-online-gallery/static/css/main.0dc6b208.css",
+    "main.js": "/aic-online-gallery/static/js/main.92501d53.js",
+    "static/js/787.226dbd25.chunk.js": "/aic-online-gallery/static/js/787.226dbd25.chunk.js",
+    "index.html": "/aic-online-gallery/index.html",
+    "main.0dc6b208.css.map": "/aic-online-gallery/static/css/main.0dc6b208.css.map",
+    "main.92501d53.js.map": "/aic-online-gallery/static/js/main.92501d53.js.map",
+    "787.226dbd25.chunk.js.map": "/aic-online-gallery/static/js/787.226dbd25.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0dc6b208.css",
+    "static/js/main.92501d53.js"
+  ]
+}
