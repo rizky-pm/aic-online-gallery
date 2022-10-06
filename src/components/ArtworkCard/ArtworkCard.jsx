@@ -8,6 +8,7 @@ import { IIIF_URL } from '../../constants';
 import './ArtworkCard.scss';
 
 const ArtworkCard = ({ data }) => {
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
   const [artworkDetail, setArtworkDetail] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
@@ -55,6 +56,10 @@ const ArtworkCard = ({ data }) => {
             alt=''
             className='artwork__image'
             loading='lazy'
+            onLoad={() => {
+              setIsImageLoaded(true);
+              console.log(data.title, 'Image loaded');
+            }}
           />
         </div>
       ) : (
@@ -66,6 +71,7 @@ const ArtworkCard = ({ data }) => {
           No Image
         </h1>
       )}
+      {!isImageLoaded ? <div className='artwork__image--skeleton'></div> : null}
       <div
         className={`${
           isHovered ? 'artwork--overlay__hovered' : ''

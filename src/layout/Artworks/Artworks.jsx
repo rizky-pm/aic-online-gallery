@@ -25,6 +25,7 @@ import './Artworks.scss';
 import SpinComponent from '../../components/SpinComponent/SpinComponent';
 
 const Artworks = () => {
+  const [isBottomOfPage, setIsBottomOfPage] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
   const [splittedArray, setSplittedArray] = useState([]);
 
@@ -41,7 +42,9 @@ const Artworks = () => {
   const sectionRef = useRef(null);
 
   const fetchAllArtworks = async (artworksPage) => {
+    setIsFetching(true);
     dispatch(addPage());
+    setIsBottomOfPage(true);
     const query = tag.includes('/s/')
       ? querySelector(
           location,
@@ -55,8 +58,6 @@ const Artworks = () => {
           searchQuery,
           artworksPage === 0 ? 1 : artworksPage + 1
         );
-
-    setIsFetching(true);
 
     const response = await getAllArtworks(query);
 
@@ -104,6 +105,23 @@ const Artworks = () => {
       splitArrayHandler(artworksState, pageState);
     }
   }, [artworksState]);
+
+  // useEffect(() => {
+  //   const onScroll = async function () {
+  //     if (
+  //       window.innerHeight + window.scrollY >=
+  //       sectionRef.current.offsetHeight * 1
+  //     ) {
+  //       if (!isFetching) {
+  //         console.log("you're at the bottom of the page");
+  //         await fetchAllArtworks(pageState);
+  //       }
+  //     }
+  //   };
+
+  //   window.addEventListener('scroll', onScroll);
+  //   return () => window.removeEventListener('scroll', onScroll);
+  // }, []);
 
   return (
     <section ref={sectionRef} className='artworks__container'>
