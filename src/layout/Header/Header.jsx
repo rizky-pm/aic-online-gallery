@@ -42,7 +42,7 @@ const Header = () => {
     const response = await getAllArtworks(query);
 
     if (response.status === 200) {
-      setHeaderData(response.data.data[randomNumberWithMinMax(0, 9)]);
+      setHeaderData(response.data.data[randomNumberWithMinMax(0, 8)]);
     }
   };
 
