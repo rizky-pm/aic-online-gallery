@@ -70,9 +70,9 @@ const Header = () => {
     >
       <div className='header--overlay'></div>
       <div className='header--content'>
-        <h1 className='header--content__title'>Artlerry</h1>
+        <h1 className='header--content__title'>Art Gallery</h1>
         <p className='header--content__desc'>
-          Home to a collection of art that spans centuries and the globe
+          Home to a collection of art that spans centuries and the globe.
         </p>
         <InputComponent type='default' onClick={scrollToPositionHandler} />
 
