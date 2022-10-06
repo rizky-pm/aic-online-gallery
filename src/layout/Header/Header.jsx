@@ -46,7 +46,7 @@ const Header = () => {
           searchQuery,
           uniqueRandomNumber(
             0,
-            totalPageState > 100 ? totalPageState : 100,
+            totalPageState > 100 ? 100 : totalPageState,
             usedPage,
             setUsedPage
           )
@@ -57,7 +57,7 @@ const Header = () => {
           searchQuery,
           uniqueRandomNumber(
             0,
-            totalPageState > 100 ? totalPageState : 100,
+            totalPageState > 100 ? 100 : totalPageState,
             usedPage,
             setUsedPage
           )
@@ -84,6 +84,7 @@ const Header = () => {
     setPage(1);
     fetchTotalPages();
     fetchAllArtworks();
+    setUsedPage([]);
   }, [location]);
 
   return (

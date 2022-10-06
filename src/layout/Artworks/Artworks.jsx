@@ -66,7 +66,7 @@ const Artworks = () => {
           searchQuery,
           uniqueRandomNumber(
             0,
-            totalPageState > 100 ? totalPageState : 100,
+            totalPageState > 100 ? 100 : totalPageState,
             usedPage,
             setUsedPage
           )
@@ -110,6 +110,7 @@ const Artworks = () => {
     dispatch(clearArtworks());
     fetchAllArtworks(pageState);
     fetchTotalPages();
+    setUsedPage([]);
 
     if (sectionRef) {
       dispatch(setRefOffSet(sectionRef.current.offsetTop));
