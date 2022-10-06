@@ -71,7 +71,7 @@ const Navbar = () => {
               (isActive ? 'navbar--link__active' : undefined) + ' navbar--link'
             }
             end
-            to='/'
+            to='/aic-online-gallery/'
             onClick={() => selectTagHandler('')}
           >
             Explore
@@ -83,7 +83,7 @@ const Navbar = () => {
                 (isActive ? 'navbar--link__active' : undefined) +
                 ' navbar--link'
               }
-              to={`/t/${item.title}`}
+              to={`aic-online-gallery/t/${item.title}`}
               onClick={() => selectTagHandler('')}
             >
               {item.title}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Detail from '../pages/Detail/Detail';
 
 import Home from '../pages/Home/Home';
@@ -18,6 +18,7 @@ const Router = () => {
           path='aic-online-gallery/artwork/:artworkId'
           element={<Detail />}
         />
+        <Route path='/' element={<Navigate to='/aic-online-gallery/' />} />
       </Routes>
     </>
   );
