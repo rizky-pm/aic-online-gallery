@@ -18,7 +18,6 @@ const Router = () => {
           path='aic-online-gallery/artwork/:artworkId'
           element={<Detail />}
         />
-        <Route path='/' element={<Navigate to='/aic-online-gallery/' />} />
       </Routes>
     </>
   );
