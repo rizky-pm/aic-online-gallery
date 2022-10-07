@@ -1,6 +1,6 @@
 {
-  "name": "aic-online-museum",
-  "homepage": "https://rizky-pm.github.io/aic-online-gallery/",
+  "name": "art-gallery",
+  "homepage": "https://rizky-pm.github.io/art-gallery/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

@@ -25,11 +25,8 @@ const Header = () => {
   const totalPageState = useSelector((state) => state.artworks.totalPage);
 
   const location = useLocation().pathname;
-  let tag = removeString(useLocation().pathname, '/aic-online-gallery/t/');
-  const searchQuery = removeString(
-    useLocation().pathname,
-    '/aic-online-gallery/s/'
-  );
+  let tag = removeString(useLocation().pathname, '/art-gallery/t/');
+  const searchQuery = removeString(useLocation().pathname, '/art-gallery/s/');
   const offsetState = useSelector((state) => state.artworks.refOffSet);
 
   const scrollToPositionHandler = () => {
@@ -39,7 +36,7 @@ const Header = () => {
   const fetchAllArtworks = async () => {
     setPage((prevState) => prevState + 1);
 
-    const query = tag.includes('/aic-online-gallery/s/')
+    const query = tag.includes('/art-gallery/s/')
       ? querySelector(
           location,
           (tag = ''),

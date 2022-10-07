@@ -35,7 +35,7 @@ const InputComponent = ({ type, onClick }) => {
           onClick={(e) => {
             onClick();
           }}
-          to={`/aic-online-gallery/s/${search}`}
+          to={`/art-gallery/s/${search}`}
         >
           <SearchOutlined className='input-search-component' />
         </Link>

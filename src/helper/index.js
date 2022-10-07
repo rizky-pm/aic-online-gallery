@@ -56,13 +56,13 @@ export const querySelector = (location, tag, searchQuery, page) => {
   let locationTag = location.substring(0, 22);
 
   switch (locationTag) {
-    case '/aic-online-gallery/t/':
+    case '/art-gallery/t/':
       return `/search?${FIELDS_PARAM}&query${getQueryMatch(
         'artwork_type_title',
         tag
       )}&${getQueryExists('image_id')}&page=${page}&limit=9`;
 
-    case '/aic-online-gallery/s/':
+    case '/art-gallery/s/':
       return `/search?${FIELDS_PARAM}&query${getQueryExists(
         'image_id'
       )}&page=${page}&q=${removeString(searchQuery)}&limit=9`;

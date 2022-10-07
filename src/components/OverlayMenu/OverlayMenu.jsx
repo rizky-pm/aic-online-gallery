@@ -32,7 +32,7 @@ const OverlayMenu = () => {
       <div className='home__overlay--content'>
         <Link
           className='menu--link'
-          to='/aic-online-gallery/'
+          to='/art-gallery/'
           onClick={() => selectTagHandler('')}
         >
           Explore
