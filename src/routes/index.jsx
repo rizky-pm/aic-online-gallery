@@ -12,7 +12,7 @@ const Router = () => {
         <Route path='/art-gallery/' element={<Home />}>
           <Route path='t/:tag' element={<Artworks />} />
           <Route path='s/:keyword' element={<Artworks />} />
-          <Route path='/art-gallery/' index element={<Artworks />} />
+          <Route path='' element={<Artworks />} />
         </Route>
         <Route path='art-gallery/artwork/:artworkId' element={<Detail />} />
       </Routes>

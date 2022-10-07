@@ -26,11 +26,38 @@
             @include devices(tablet) {    
                 font-size: 24px;
             }
+
+            &--skeleton {
+                &:nth-child(1) {
+                    h3 {
+                        height: 20px !important;
+
+                        @include devices(tablet) {
+                            height: 24px !important;
+                        }
+                    }
+                }
+            }
         }
 
         &__artist {    
             font-size: 16px;
             font-style: italic;
+
+            &--skeleton {
+                margin-top: 16px;
+
+                &:nth-child(1) {
+
+                    h3 {
+                        height: 16px !important;
+
+                        @include devices(tablet) {
+                            height: 18px !important;
+                        }
+                    }
+                }
+            }
             
 
             @include devices(tablet) {
@@ -42,11 +69,24 @@
     &__description {
         font-size: 14px;
 
+        &--skeleton {
+            &:nth-child(1) {
+                h3 {
+                    height: 14px !important;
+
+                    @include devices(tablet) {
+                        height: 18px !important;
+                    }
+                }
+            }
+        }
+
         @include devices(tablet) {    
             font-size: 18px;
             font-weight: 600;
         }
     }
+
 
     &__wrapper__image {
         width: 100%;
@@ -59,6 +99,13 @@
 
         &:hover {
             cursor: zoom-in;
+        }
+
+        &--skeleton {
+            .ant-skeleton-image {
+                width: 100% !important;
+                height: 50vh !important;
+            }
         }
     }
 }
