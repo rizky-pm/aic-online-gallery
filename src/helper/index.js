@@ -53,7 +53,7 @@ export const getQueryMatch = (field_name, field_value) => {
 };
 
 export const querySelector = (location, tag, searchQuery, page) => {
-  let locationTag = location.substring(0, 22);
+  let locationTag = location.substring(0, 15);
 
   switch (locationTag) {
     case '/art-gallery/t/':
