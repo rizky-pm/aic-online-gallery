@@ -91,7 +91,6 @@ const Artworks = () => {
 
     if (response.status === 200) {
       fetchTotalPage(response.data.pagination.total_pages);
-      console.log(response.data.pagination.total_pages);
     }
   };
 

@@ -98,19 +98,19 @@ const Header = () => {
         </p>
         <InputComponent type='default' onClick={scrollToPositionHandler} />
 
-        {headerData ? (
-          <div className='header--content__credit'>
+        <div className='header--content__credit'>
+          {headerData?.artist_title ? (
             <p className='header--content__credit--artist'>
               By {headerData?.artist_title}
             </p>
-            <Link
-              to={`artwork/${headerData.id}`}
-              className='header--content__credit--title'
-            >
-              {headerData?.title}
-            </Link>
-          </div>
-        ) : null}
+          ) : null}
+          <Link
+            to={`artwork/${headerData.id}`}
+            className='header--content__credit--title'
+          >
+            {headerData?.title}
+          </Link>
+        </div>
       </div>
     </header>
   );

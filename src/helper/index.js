@@ -19,7 +19,6 @@ export const uniqueRandomNumber = (min, max, array, setArray) => {
     randomNumber = randomNumberWithMinMax(min, max);
   }
   setArray([...array, randomNumber]);
-  console.log(array);
 
   return randomNumber;
 };
