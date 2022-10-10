@@ -9,6 +9,7 @@ const Router = () => {
   return (
     <>
       <Routes>
+        <Route path='/' element={<Navigate to='/art-gallery/' replace />} />
         <Route path='/art-gallery/' element={<Home />}>
           <Route path='t/:tag' element={<Artworks />} />
           <Route path='s/:keyword' element={<Artworks />} />
