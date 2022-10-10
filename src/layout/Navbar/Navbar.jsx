@@ -31,8 +31,10 @@ const Navbar = () => {
     }
   };
 
-  const scrollToPositionHandler = () => {
+  const onClickSearch = () => {
     scrollToPosition(offsetState);
+    dispatch(clearArtworks());
+    dispatch(resetPage());
   };
 
   const scrollToLeft = () => {
@@ -55,7 +57,7 @@ const Navbar = () => {
 
   return (
     <nav className={`${isMenuOpen ? 'nav__menu--open' : 'nav__menu--close'}`}>
-      <InputComponent onClick={scrollToPositionHandler} type='rounded' />
+      <InputComponent onClick={onClickSearch} type='rounded' />
       <div className='nav__tag'>
         <div className='nav__tag--hamburger'>
           <Hamburger />

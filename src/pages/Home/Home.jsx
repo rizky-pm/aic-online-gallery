@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 
 import { getAllArtworks } from '../../api';
 import { fetchTotalData, fetchTotalPage } from '../../store/artworks.slice';
@@ -13,19 +13,20 @@ import Footer from '../../layout/Footer/Footer';
 
 const Home = () => {
   const dispatch = useDispatch();
+  const location = useLocation().pathname;
 
   const fetchTotalDataHandler = async () => {
     const queryPayload = '';
     const response = await getAllArtworks(queryPayload);
     if (response.status === 200) {
-      dispatch(fetchTotalData(response.data.pagination.total));
+      // dispatch(fetchTotalData(response.data.pagination.total));
       dispatch(fetchTotalPage(response.data.pagination.total_pages));
     }
   };
 
   useEffect(() => {
     fetchTotalDataHandler();
-  }, []);
+  }, [location]);
 
   return (
     <section className='home__container'>

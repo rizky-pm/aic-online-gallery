@@ -50,12 +50,14 @@ const Artworks = () => {
           location,
           (tag = ''),
           searchQuery,
-          uniqueRandomNumber(
-            0,
-            totalPageState > 100 ? 100 : totalPageState,
-            usedPage,
-            setUsedPage
-          )
+          searchQuery
+            ? artworksPage + 1
+            : uniqueRandomNumber(
+                0,
+                totalPageState > 100 ? 100 : totalPageState,
+                usedPage,
+                setUsedPage
+              )
         )
       : querySelector(
           location,
@@ -75,7 +77,6 @@ const Artworks = () => {
 
     if (response.status === 200) {
       dispatch(fetched(response.data.data));
-      dispatch(fetchTotalPage(response.data.pagination.total_pages));
     }
 
     setIsFetching(false);
@@ -90,7 +91,7 @@ const Artworks = () => {
     const response = await getTotalPages(query);
 
     if (response.status === 200) {
-      fetchTotalPage(response.data.pagination.total_pages);
+      // fetchTotalPage(response.data.pagination.total_pages);
     }
   };
 
