@@ -48,7 +48,6 @@ nav {
 }
 
 .link__wrapper {
-    // position: relative;
     display: flex;
     overflow: hidden;
     align-items: center;
@@ -57,17 +56,6 @@ nav {
 
     @include devices(mobile) {
         display: none;
-        // flex-direction: column;
-        // justify-content: center;
-        // height: 100vh;
-        // width: 100vw;
-        // position: fixed;
-        // top: 0;
-        // left: 0;
-        // background-color: $color-dark;
-        // transition: transform 0.3s ease-in-out;
-        // transform: translateX(-100%);
-        // z-index: 5;
     }
 }
 

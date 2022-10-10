@@ -15,8 +15,11 @@ import {
   scrollToPosition,
   uniqueRandomNumber,
 } from '../../helper';
+import ProgresiveImage from '../../components/ProgresiveImage/ProgresiveImage';
+import { IIIF_URL } from '../../constants';
 
 const Header = () => {
+  const [isFetching, setIsFetching] = useState(false);
   const [headerData, setHeaderData] = useState({});
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -35,6 +38,7 @@ const Header = () => {
 
   const fetchAllArtworks = async () => {
     setPage((prevState) => prevState + 1);
+    setIsFetching(true);
 
     const query = tag.includes('/art-gallery/s/')
       ? querySelector(
@@ -61,6 +65,7 @@ const Header = () => {
         );
 
     const response = await getAllArtworks(query);
+    setIsFetching(false);
 
     if (response.status === 200) {
       setHeaderData(response.data.data[randomNumberWithMinMax(0, 8)]);
@@ -77,6 +82,8 @@ const Header = () => {
     }
   };
 
+  console.log(headerData);
+
   useEffect(() => {
     setPage(1);
     fetchTotalPages();
@@ -86,10 +93,28 @@ const Header = () => {
 
   return (
     <header
-      style={{
-        backgroundImage: `url(https://www.artic.edu/iiif/2/${headerData?.image_id}/full/843,/0/default.jpg)`,
-      }}
+    // style={{
+    //   backgroundImage: `url(https://www.artic.edu/iiif/2/${headerData?.image_id}/full/843,/0/default.jpg)`,
+    // }}
     >
+      {headerData?.thumbnail?.lqip ? (
+        <ProgresiveImage
+          src={`${IIIF_URL}${headerData?.image_id}/full/843,/0/default.jpg`}
+          placeholderSrc={headerData?.thumbnail?.lqip}
+          width='100%'
+          height='100%'
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.25)',
+            // backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+            // backgroundPosition: 'center',
+            // height: '90vh',
+          }}
+        />
+      ) : null}
       <div className='header--overlay'></div>
       <div className='header--content'>
         <h1 className='header--content__title'>Art Galleryy</h1>
@@ -105,7 +130,7 @@ const Header = () => {
             </p>
           ) : null}
           <Link
-            to={`artwork/${headerData.id}`}
+            to={`artwork/${headerData?.id}`}
             className='header--content__credit--title'
           >
             {headerData?.title}

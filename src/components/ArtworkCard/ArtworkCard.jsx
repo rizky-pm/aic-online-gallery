@@ -6,6 +6,7 @@ import { getArtworkById } from '../../api';
 import { IIIF_URL } from '../../constants';
 
 import './ArtworkCard.scss';
+import ProgresiveImage from '../ProgresiveImage/ProgresiveImage';
 
 const ArtworkCard = ({ data }) => {
   const [isFetching, setIsFetching] = useState(false);
@@ -30,11 +31,13 @@ const ArtworkCard = ({ data }) => {
     navigate('/art-gallery/artwork/' + data.id);
   };
 
+  console.log(isFetching);
+
   useEffect(() => {
     fetchArtworkById();
   }, []);
 
-  return (
+  return isFetching ? null : (
     <div
       className='artwork'
       onMouseEnter={() => {
@@ -48,24 +51,13 @@ const ArtworkCard = ({ data }) => {
         display: artworkDetail?.image_id ? 'block' : 'none',
       }}
     >
-      {artworkDetail?.image_id ? (
-        <div className='artwork__image'>
-          <img
-            src={`${IIIF_URL}${artworkDetail?.image_id}/full/400,/0/default.jpg`}
-            alt=''
-            className='artwork__image'
-            loading='lazy'
-          />
-        </div>
-      ) : (
-        <h1
-          style={{
-            color: 'red',
-          }}
-        >
-          No Image
-        </h1>
-      )}
+      <ProgresiveImage
+        src={`${IIIF_URL}${data?.image_id}/full/600,/0/default.jpg`}
+        placeholderSrc={data?.thumbnail.lqip}
+        width='100%'
+        height='100%'
+      />
+
       <div
         className={`${
           isHovered ? 'artwork--overlay__hovered' : ''
