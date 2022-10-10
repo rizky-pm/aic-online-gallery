@@ -13,7 +13,7 @@ const ProgresiveImage = ({ placeholderSrc, src, ...props }) => {
 
   const imageClickHandler = () => {
     if (includeString(location.pathname, '/artwork/')) {
-      console.log(linkRef.current.click());
+      linkRef.current.click();
     }
   };
 

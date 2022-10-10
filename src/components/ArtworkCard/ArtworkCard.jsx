@@ -31,8 +31,6 @@ const ArtworkCard = ({ data }) => {
     navigate('/art-gallery/artwork/' + data.id);
   };
 
-  console.log(isFetching);
-
   useEffect(() => {
     fetchArtworkById();
   }, []);

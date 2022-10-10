@@ -82,8 +82,6 @@ const Header = () => {
     }
   };
 
-  console.log(headerData);
-
   useEffect(() => {
     setPage(1);
     fetchTotalPages();

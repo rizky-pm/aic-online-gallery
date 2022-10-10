@@ -69,8 +69,6 @@ const Artworks = () => {
           )
         );
 
-    console.log(query);
-
     setIsFetching(true);
 
     const response = await getAllArtworks(query);
