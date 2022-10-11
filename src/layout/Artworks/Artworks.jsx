@@ -1,15 +1,14 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Button } from 'antd';
 
 import ArtworkCard from '../../components/ArtworkCard/ArtworkCard';
 
-import { getAllArtworks, getTotalPages } from '../../api';
+import { getAllArtworks } from '../../api';
 import {
   includeString,
   querySelector,
-  randomNumberWithMinMax,
   removeString,
   splitArray,
   uniqueRandomNumber,
@@ -18,7 +17,6 @@ import {
   addPage,
   clearArtworks,
   fetched,
-  fetchTotalPage,
   resetPage,
   setRefOffSet,
 } from '../../store/artworks.slice';
@@ -37,13 +35,12 @@ const Artworks = () => {
 
   const dispatch = useDispatch();
   const location = useLocation().pathname;
-  const { keyword } = useParams();
 
   let tag = removeString(useLocation().pathname, '/art-gallery/t/');
   const searchQuery = removeString(useLocation().pathname, '/art-gallery/s/');
   const sectionRef = useRef(null);
 
-  const fetchAllArtworks = async (artworksPage) => {
+  const fetchAllArtworks = async () => {
     dispatch(addPage());
     const page = uniqueRandomNumber(
       1,
@@ -98,8 +95,6 @@ const Artworks = () => {
   useEffect(() => {
     setUsedPage([]);
   }, [location]);
-
-  console.log(usedPage);
 
   return (
     <section ref={sectionRef} className='artworks__container'>

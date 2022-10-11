@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Skeleton } from 'antd';
 
 import { getArtworkById } from '../../api';
-import { IIIF_URL } from '../../constants';
+import { FIELDS_PARAM, IIIF_URL } from '../../constants';
 
 import Footer from '../../layout/Footer/Footer';
 import OverlayMenu from '../../components/OverlayMenu/OverlayMenu';
@@ -13,13 +13,11 @@ import './Detail.scss';
 
 const Detail = () => {
   const [isFetching, setIsFetching] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
   const [data, setData] = useState(null);
   const { artworkId } = useParams();
 
   const fetchArtworkById = async () => {
-    const query =
-      '?fields=artist_id,artist_title,date_start,id,image_id,alt_image_ids,title,artwork_type_title,artwork_type_id,thumbnail,dimensions';
+    const query = `?${FIELDS_PARAM}`;
 
     setIsFetching(true);
     const response = await getArtworkById(artworkId, query);
@@ -28,10 +26,6 @@ const Detail = () => {
     if (response.status === 200) {
       setData(response.data.data);
     }
-  };
-
-  const onImageLoadedHandler = () => {
-    setImageLoaded(true);
   };
 
   useEffect(() => {
