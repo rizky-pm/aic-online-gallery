@@ -14,7 +14,7 @@ const InputComponent = ({ type, onClick }) => {
   const location = useLocation().pathname;
   const dispatch = useDispatch();
 
-  const onPressEnterHanlder = () => {
+  const onPressEnterHandler = () => {
     if (search.length > 0) {
       onClick();
       searchInputRef.current.click();
@@ -32,8 +32,10 @@ const InputComponent = ({ type, onClick }) => {
       onChange={(e) => {
         setSearch(e.target.value);
       }}
-      onPressEnter={onPressEnterHanlder}
+      onPressEnter={onPressEnterHandler}
+      type='text'
       value={search}
+      tabIndex='-1'
       prefix={
         <Link
           ref={searchInputRef}
