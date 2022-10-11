@@ -7,7 +7,7 @@ import InputComponent from '../../components/InputComponent/InputComponent';
 
 import './Header.scss';
 
-import { getAllArtworks, getTotalPages } from '../../api';
+import { getAllArtworks } from '../../api';
 import {
   querySelector,
   randomNumberWithMinMax,
@@ -20,10 +20,7 @@ import { IIIF_URL } from '../../constants';
 import { resetPage } from '../../store/artworks.slice';
 
 const Header = () => {
-  const [isFetching, setIsFetching] = useState(false);
   const [headerData, setHeaderData] = useState({});
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
   const [usedPage, setUsedPage] = useState([]);
 
   const pageState = useSelector((state) => state.artworks.page);
@@ -39,55 +36,21 @@ const Header = () => {
     scrollToPosition(offsetState);
   };
 
-  const fetchAllArtworks = async (artworksPage) => {
-    setPage((prevState) => prevState + 1);
-    setIsFetching(true);
-
-    const query = tag.includes('/art-gallery/s/')
-      ? querySelector(
-          location,
-          (tag = ''),
-          searchQuery,
-          searchQuery
-            ? artworksPage + 1
-            : uniqueRandomNumber(
-                0,
-                totalPageState > 100 ? 100 : totalPageState,
-                usedPage,
-                setUsedPage
-              )
-        )
-      : querySelector(
-          location,
-          tag,
-          searchQuery,
-          uniqueRandomNumber(
-            0,
-            totalPageState > 100 ? 100 : totalPageState,
-            usedPage,
-            setUsedPage
-          )
-        );
-
-    const response = await getAllArtworks(query);
-    setIsFetching(false);
-
-    if (response.status === 200) {
-      setHeaderData(response.data.data[randomNumberWithMinMax(0, 8)]);
-    }
-  };
-
-  const fetchTotalPages = async () => {
-    let page = 1;
+  const fetchAllArtworks = async () => {
+    const page = uniqueRandomNumber(
+      1,
+      totalPageState > 100 ? 100 : totalPageState,
+      usedPage,
+      setUsedPage
+    );
 
     const query = tag.includes('/art-gallery/s/')
       ? querySelector(location, (tag = ''), searchQuery, page)
       : querySelector(location, tag, searchQuery, page);
 
-    const response = await getTotalPages(query);
-
+    const response = await getAllArtworks(query);
     if (response.status === 200) {
-      setTotalPages(response.data.pagination.total_pages);
+      setHeaderData(response.data.data[randomNumberWithMinMax(0, 8)]);
     }
   };
 
@@ -96,22 +59,19 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    setPage(1);
-    // fetchTotalPages();
-
     if (totalPageState > 0) {
       fetchAllArtworks(pageState);
     }
 
     setUsedPage([]);
-  }, [location, totalPageState]);
+  }, [totalPageState]);
+
+  useEffect(() => {
+    setHeaderData({});
+  }, [location]);
 
   return (
-    <header
-    // style={{
-    //   backgroundImage: `url(https://www.artic.edu/iiif/2/${headerData?.image_id}/full/843,/0/default.jpg)`,
-    // }}
-    >
+    <header>
       {headerData?.thumbnail?.lqip ? (
         <ProgresiveImage
           src={`${IIIF_URL}${headerData?.image_id}/full/843,/0/default.jpg`}
@@ -123,10 +83,7 @@ const Header = () => {
             top: 0,
             left: 0,
             backgroundColor: 'rgba(0, 0, 0, 0.25)',
-            // backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
-            // backgroundPosition: 'center',
-            // height: '90vh',
           }}
         />
       ) : null}

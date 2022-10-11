@@ -16,8 +16,10 @@ export const randomNumberWithMinMax = (min, max) => {
 export const uniqueRandomNumber = (min, max, array, setArray) => {
   let randomNumber = randomNumberWithMinMax(
     min,
-    max === 0 ? Math.random() * 100 : max
+    max
+    // max === 0 ? Math.random() * 100 : max
   );
+
   while (array.indexOf(randomNumber) > -1) {
     randomNumber = randomNumberWithMinMax(min, max);
   }

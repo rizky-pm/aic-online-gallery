@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation, useParams } from 'react-router-dom';
 import { Button } from 'antd';
@@ -45,31 +45,16 @@ const Artworks = () => {
 
   const fetchAllArtworks = async (artworksPage) => {
     dispatch(addPage());
+    const page = uniqueRandomNumber(
+      1,
+      totalPageState > 100 ? 100 : totalPageState,
+      usedPage,
+      setUsedPage
+    );
+
     const query = tag.includes('/art-gallery/s/')
-      ? querySelector(
-          location,
-          (tag = ''),
-          searchQuery,
-          searchQuery
-            ? artworksPage + 1
-            : uniqueRandomNumber(
-                0,
-                totalPageState > 100 ? 100 : totalPageState,
-                usedPage,
-                setUsedPage
-              )
-        )
-      : querySelector(
-          location,
-          tag,
-          searchQuery,
-          uniqueRandomNumber(
-            0,
-            totalPageState > 100 ? 100 : totalPageState,
-            usedPage,
-            setUsedPage
-          )
-        );
+      ? querySelector(location, (tag = ''), searchQuery, page)
+      : querySelector(location, tag, searchQuery, page);
 
     setIsFetching(true);
 
@@ -82,19 +67,6 @@ const Artworks = () => {
     setIsFetching(false);
   };
 
-  const fetchTotalPages = async () => {
-    let page = 1;
-
-    const query = tag.includes('/art-gallery/s/')
-      ? querySelector(location, (tag = ''), searchQuery, page)
-      : querySelector(location, tag, searchQuery, page);
-    const response = await getTotalPages(query);
-
-    if (response.status === 200) {
-      // fetchTotalPage(response.data.pagination.total_pages);
-    }
-  };
-
   const splitArrayHandler = (array, page) => {
     setSplittedArray(splitArray(array, page === 1 ? 3 : 3 * page));
   };
@@ -105,20 +77,29 @@ const Artworks = () => {
 
   useEffect(() => {
     dispatch(clearArtworks());
-    fetchAllArtworks(pageState);
-    fetchTotalPages();
-    setUsedPage([]);
+
+    if (totalPageState > 0) {
+      fetchAllArtworks(pageState);
+    }
+
+    setSplittedArray([]);
 
     if (sectionRef) {
       dispatch(setRefOffSet(sectionRef.current.offsetTop));
     }
-  }, [location, keyword]);
+  }, [totalPageState]);
 
   useEffect(() => {
     if (artworksState.length > 0) {
       splitArrayHandler(artworksState, pageState);
     }
   }, [artworksState]);
+
+  useEffect(() => {
+    setUsedPage([]);
+  }, [location]);
+
+  console.log(usedPage);
 
   return (
     <section ref={sectionRef} className='artworks__container'>
@@ -147,7 +128,7 @@ const Artworks = () => {
         </div>
       )}
       <div className='artworks__button'>
-        {artworksState.length > 0 && pageState <= totalPageState ? (
+        {usedPage.length !== totalPageState ? (
           <Button
             block
             type='primary'
