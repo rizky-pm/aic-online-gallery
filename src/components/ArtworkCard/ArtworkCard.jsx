@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { getArtworkById } from '../../api';
-import { IIIF_URL } from '../../constants';
+import { FIELDS_PARAM, IIIF_URL } from '../../constants';
 
 import './ArtworkCard.scss';
 import ProgresiveImage from '../ProgresiveImage/ProgresiveImage';
@@ -15,7 +15,7 @@ const ArtworkCard = ({ data }) => {
   const navigate = useNavigate();
 
   const fetchArtworkById = async () => {
-    const query = `/?fields=id,title,image_id,alt_image_ids,artist_title,dimension`;
+    const query = `/?${FIELDS_PARAM}`;
 
     setIsFetching(true);
     const response = await getArtworkById(data.id, query);
@@ -27,7 +27,7 @@ const ArtworkCard = ({ data }) => {
   };
 
   const onClickHandler = () => {
-    navigate('/art-gallery/artwork/' + data.id);
+    navigate('/art-gallery/artwork/' + artworkDetail.id);
   };
 
   useEffect(() => {
@@ -48,12 +48,14 @@ const ArtworkCard = ({ data }) => {
         display: artworkDetail?.image_id ? 'block' : 'none',
       }}
     >
-      <ProgresiveImage
-        src={`${IIIF_URL}${data?.image_id}/full/600,/0/default.jpg`}
-        placeholderSrc={data?.thumbnail.lqip}
-        width='100%'
-        height='100%'
-      />
+      {artworkDetail ? (
+        <ProgresiveImage
+          src={`${IIIF_URL}${artworkDetail?.image_id}/full/600,/0/default.jpg`}
+          placeholderSrc={artworkDetail?.thumbnail.lqip}
+          width='100%'
+          height='100%'
+        />
+      ) : null}
 
       <div
         className={`${
@@ -61,8 +63,12 @@ const ArtworkCard = ({ data }) => {
         } artwork--overlay`}
       >
         <div className='artwork--overlay--meta'>
-          <p className='artwork--overlay--meta__artist'>{data.artist_title}</p>
-          <p className='artwork--overlay--meta__title'>{data.title}</p>
+          <p className='artwork--overlay--meta__artist'>
+            {artworkDetail?.artist_title}
+          </p>
+          <p className='artwork--overlay--meta__title'>
+            {artworkDetail?.title}
+          </p>
         </div>
       </div>
     </div>
