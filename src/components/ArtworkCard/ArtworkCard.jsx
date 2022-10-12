@@ -9,6 +9,7 @@ import ProgresiveImage from '../ProgresiveImage/ProgresiveImage';
 
 const ArtworkCard = ({ data }) => {
   const [isFetching, setIsFetching] = useState(false);
+  const [lqipThumbnail, setLqipThumbnail] = useState('');
   const [artworkDetail, setArtworkDetail] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -23,6 +24,7 @@ const ArtworkCard = ({ data }) => {
     if (response.status === 200) {
       setIsFetching(false);
       setArtworkDetail(response.data.data);
+      setLqipThumbnail(response.data.data.thumbnail?.lqip);
     }
   };
 
@@ -48,10 +50,10 @@ const ArtworkCard = ({ data }) => {
         display: artworkDetail?.image_id ? 'block' : 'none',
       }}
     >
-      {artworkDetail ? (
+      {lqipThumbnail ? (
         <ProgresiveImage
           src={`${IIIF_URL}${artworkDetail?.image_id}/full/600,/0/default.jpg`}
-          placeholderSrc={artworkDetail?.thumbnail.lqip}
+          placeholderSrc={lqipThumbnail}
           width='100%'
           height='100%'
         />
